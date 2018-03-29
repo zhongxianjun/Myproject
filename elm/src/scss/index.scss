@@ -1,0 +1,28 @@
+$size:12px;//全局字体
+
+.header{
+	width:100%;
+	background:#0089dc;
+	.wrapper{
+		width:330px;
+		overflow:hidden;
+		ul{
+			width:$size*80;
+			li{
+				float:left;
+				width:$size*4;
+				margin-right:22px;
+				padding:13px 0 6px 5px;
+				font-size:$size;
+				color:#fff;
+				&.active{
+					border:2px solid #fff;
+				}
+			}
+		}
+	}
+	.top-cate-op{
+		width:75px;
+		height:100%;
+	}
+}
