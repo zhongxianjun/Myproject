@@ -36,12 +36,20 @@ module.exports = {
 	          			use: [
 	          					'css-loader',
 	          					'sass-loader'
-	          				],
+	          				]
 	        		})
 			},{
 				test:/\.(png|jpg|svg|gif)$/,
 				use:[
-					'file-loader'
+					{
+						loader:'file-loader',
+						options:{
+							outputPath: 'static',
+							publicPath: '../images',
+							name: '[name].[ext]',
+							useRelativePath: true
+						}
+					}
 				]
 			}
 		]

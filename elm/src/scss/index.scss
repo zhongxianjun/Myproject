@@ -1,28 +1,140 @@
-$size:12px;//全局字体
+$size:14px;//全局字体
 
 .header{
 	width:100%;
+	min-height:35px;
 	background:#0089dc;
-	.wrapper{
+	display:flex;
+	.top-cate-wrapper{
 		width:330px;
 		overflow:hidden;
+		flex:6;
 		ul{
 			width:$size*80;
+			margin-left:10px;
 			li{
 				float:left;
-				width:$size*4;
 				margin-right:22px;
-				padding:13px 0 6px 5px;
-				font-size:$size;
+				padding-top:10px;
 				color:#fff;
 				&.active{
-					border:2px solid #fff;
+					span{
+						border-bottom:2px solid #fff;
+						opacity:1;
+					}
+				}
+				span{
+					border-bottom:2px solid #fff;
+					opacity:.7;
+					font-size:$size;
 				}
 			}
 		}
 	}
 	.top-cate-op{
-		width:75px;
-		height:100%;
+		width:45px;
+		line-height:35px;
+		background:url('../images/down.png');
+		text-align:center;
+		flex:1;
 	}
+
+	.top-cate-all{
+		position:fixed;
+		z-index:999;
+		width:100%;
+		height:100vh;
+		background:rgba(0,0,0,.3);
+		font-size:$size;
+		.categories{
+			width:100%;
+			background:#f9f9f9;
+			.categories-top{
+				padding:0 8px 0 15px;
+				line-height:35px;
+				background:#f9f9f9;
+				.close{
+					width:45px;
+					min-height:35px;
+					float:right;
+					background:url('../images/close.png') center center no-repeat;
+					background-size:20px 20px;
+				}
+			}
+			.categories-content{
+				height:420px;
+				overflow:hidden;
+				display:flex;
+				background-color: #fff;
+				color:#666;
+				.content-first{
+					min-width:130px;
+					flex:1;
+					padding-right:10px;
+					.wrapper{
+						height:100%;
+						overflow:hidden;
+						.content{
+							height:48*20px;
+							li{
+								box-sizing:border-box;
+								line-height:48px;
+								background:#f9f9f9;
+								span{
+										padding-left:20px;
+									}
+								&.active{
+									background:#fff;
+									span{
+										border-left:4px solid #2395ff;
+									}
+								}
+							}
+						}
+					}	
+				}
+				.content-second{
+					padding-left:10px;
+					padding-right:10px;
+					flex: 2;
+					color:#666;
+					.wrapper{
+						height:100%;
+						overflow:hidden;
+						.content{
+							height:48*20px;
+							li{
+								line-height:48px;
+								&.active{
+									span{
+										color:#2395ff;
+									}
+								}
+								img{
+									display:inline-block;
+									width:37px;
+									height:37px;
+									vertical-align:middle;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// footer的背景图片样式
+$bg:url('../images/cur-index.png') url('../images/indent.png') url('../images/mine.png');
+
+$i:1;
+@each $index in $bg{
+	.a#{$i}{
+		background-image:$index;
+		background-repeat:no-repeat;
+		background-size:20px 20px;
+		background-position: center 2px;
+	}
+	$i:$i+1;
 }
