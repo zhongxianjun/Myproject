@@ -1,21 +1,23 @@
-$size:14px;//全局字体
+$bodysize:14px;//全局字体
+$headercolor:#0089dc;//头部颜色
 
 .header{
 	width:100%;
 	min-height:35px;
-	background:#0089dc;
+	background:$headercolor;
 	display:flex;
 	.top-cate-wrapper{
 		width:330px;
 		overflow:hidden;
 		flex:6;
 		ul{
-			width:$size*80;
 			margin-left:10px;
+			clear:both;
+			overflow:hidden;
 			li{
 				float:left;
-				margin-right:22px;
 				padding-top:10px;
+				padding-right:22px;
 				color:#fff;
 				&.active{
 					span{
@@ -24,9 +26,10 @@ $size:14px;//全局字体
 					}
 				}
 				span{
-					border-bottom:2px solid #fff;
+					border-bottom:2px solid $headercolor;
+					font-size:$bodysize;
+					display:block;
 					opacity:.7;
-					font-size:$size;
 				}
 			}
 		}
@@ -34,9 +37,11 @@ $size:14px;//全局字体
 	.top-cate-op{
 		width:45px;
 		line-height:35px;
-		background:url('../images/down.png');
+		background:url('../images/down.png') center 8px no-repeat;
+		background-size:20px 20px;
 		text-align:center;
 		flex:1;
+		border-left:1px solid #0581cc;
 	}
 
 	.top-cate-all{
@@ -45,7 +50,7 @@ $size:14px;//全局字体
 		width:100%;
 		height:100vh;
 		background:rgba(0,0,0,.3);
-		font-size:$size;
+		font-size:$bodysize;
 		.categories{
 			width:100%;
 			background:#f9f9f9;
@@ -57,7 +62,7 @@ $size:14px;//全局字体
 					width:45px;
 					min-height:35px;
 					float:right;
-					background:url('../images/close.png') center center no-repeat;
+					background:url('../images/close.png') 16px center no-repeat;
 					background-size:20px 20px;
 				}
 			}
@@ -80,14 +85,26 @@ $size:14px;//全局字体
 								box-sizing:border-box;
 								line-height:48px;
 								background:#f9f9f9;
+								clear:both;
+								overflow:hidden;
 								span{
-										padding-left:20px;
-									}
+									padding-left:20px;
+								}
 								&.active{
 									background:#fff;
 									span{
 										border-left:4px solid #2395ff;
 									}
+								}
+								i{
+									font-style:normal;
+									border:1px solid #9999991a;
+									font-size:12px;
+									border-radius:10px;
+									float:right;
+									line-height:12px;
+									margin-top:18px;
+									margin-right:10px;
 								}
 							}
 						}
@@ -109,12 +126,29 @@ $size:14px;//全局字体
 									span{
 										color:#2395ff;
 									}
+									i{
+										font-style:normal;
+										border:1px solid #2395ff;
+										background:#2395ff;
+										color:#fff;
+									}
+								}
+								i{
+									font-style:normal;
+									border:1px solid #9999991a;
+									border-radius:10px;
+									font-size:12px;
+									float:right;
+									line-height:12px;
+									margin-top:18px;
+									margin-right:10px;
 								}
 								img{
 									display:inline-block;
 									width:37px;
 									height:37px;
 									vertical-align:middle;
+									margin-right:15px;
 								}
 							}
 						}
