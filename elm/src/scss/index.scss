@@ -14,6 +14,7 @@ $headercolor:#0089dc;//头部颜色
 			margin-left:10px;
 			clear:both;
 			overflow:hidden;
+			padding:0 0 5px 15px;
 			li{
 				float:left;
 				padding-top:10px;
@@ -30,6 +31,7 @@ $headercolor:#0089dc;//头部颜色
 					font-size:$bodysize;
 					display:block;
 					opacity:.7;
+					padding:2px 0;
 				}
 			}
 		}
@@ -37,7 +39,7 @@ $headercolor:#0089dc;//头部颜色
 	.top-cate-op{
 		width:45px;
 		line-height:35px;
-		background:url('../images/down.png') center 8px no-repeat;
+		background:url('../images/down.png') center 10px no-repeat;
 		background-size:20px 20px;
 		text-align:center;
 		flex:1;
@@ -51,6 +53,7 @@ $headercolor:#0089dc;//头部颜色
 		height:100vh;
 		background:rgba(0,0,0,.3);
 		font-size:$bodysize;
+		display:none;
 		.categories{
 			width:100%;
 			background:#f9f9f9;
@@ -159,6 +162,123 @@ $headercolor:#0089dc;//头部颜色
 	}
 }
 
+.restaurant-wrapper{
+	height:calc(100vh - 35px - 50px);
+	overflow:hidden;
+	background:#fff;
+	.content{
+		.restaurant{
+			.restaurant-list{
+				.restaurant-item{
+					display:flex;
+					padding:15px 10px;
+					border-bottom:1px solid #eee;
+					.pic{
+						margin-right:10px;
+						img{
+							width:65px;
+							height:65px;
+							display:block;
+							background:#ddd;
+						}
+					}
+					.info{
+						flex:1;
+						font-size:12px;
+						color:#999;
+						h3{
+							font-size:16px;
+							color:#333;
+						}
+						.data{
+							.d-top{
+								margin:10px 0;
+								.text{
+									span{
+										color: #fff;
+									    border: 1px solid #0097ff;
+									    border-radius:5px;
+									    background-image: linear-gradient(45deg,#0085ff,#0af);
+								    }
+								}
+							}
+							.d-top,.d-bottom{
+								display:flex;
+								justify-content:space-between;
+							}
+							.tags{
+								margin-top:10px;
+								img{
+									width:14px;
+									height:14px;
+									vertical-align:middle;
+									margin-bottom:2px;
+									margin-right:3px;
+								}
+								span{
+									color:rgb(232, 71, 11);
+								}
+							}
+						}
+						.activities{
+							margin-top:13px;
+							display:flex;
+							justify-content:space-between;
+							.act-list{
+								padding-right:10px;
+								ul{
+									li{
+										line-height:14px;
+										overflow:hidden;
+										white-space:nowrap;
+										text-overflow:ellipsis;
+										&.hide{
+											display:none;
+										}
+										span{
+											display:inline-block;
+											width:14px;
+											line-height:14px;
+											color:#fff;
+											border-radius:2px;
+											font-size:12px;
+											margin-right:6px;
+											margin-top:6px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.loading{
+		font-size:13px;
+		color:#666;
+		text-align:center;
+		display:none;
+		margin-top:15px;
+		.loading-icon{
+			width:15px;
+			height:15px;
+			display:inline-block;
+			vertical-align:middle;
+			animation: circleAni 2s linear;
+			animation-play-state: paused;
+			@keyframes circleAni{
+				from{
+					transform: rotateZ(0deg);
+				}
+				to{
+					transform: rotateZ(360deg);
+				}
+			}
+		}
+	}
+}
+
 // footer的背景图片样式
 $bg:url('../images/cur-index.png') url('../images/indent.png') url('../images/mine.png');
 
@@ -168,7 +288,7 @@ $i:1;
 		background-image:$index;
 		background-repeat:no-repeat;
 		background-size:20px 20px;
-		background-position: center 2px;
+		background-position: center 6px;
 	}
 	$i:$i+1;
 }
