@@ -1,0 +1,124 @@
+.header{
+	position:reletive;
+	width:100%;
+	min-height:68px;
+	span{
+		display:inline-block;
+		margin-left:10px;
+		margin-top:5px;
+		width:25px;
+		height:25px;
+		background:red;
+	}
+	.header_bg{
+		width:100%;
+		height:68px;
+		position:absolute;
+		left:0;
+		top:0;
+		background:rgba(119,103,137,.43);
+	}
+	.logo{
+		width:100%;
+		position:absolute;
+		left:50%;
+		top:22px;
+		margin-left:-39px;
+		img{
+			width:65px;
+			height:65px;
+			border-radius:2px;
+			border:1px solid rgba(119,103,137,.1);
+		}
+	}
+}
+
+.message{
+	width:100%;
+	font-size:12px;
+	text-align:center;
+	.info{
+		margin:0 auto;
+		padding:30px 15px 0 15px;
+		h1{
+			font-size:21px;
+		}
+		p{
+			width:100%;
+			margin-top:6px;
+			span{
+				padding-right:4px;
+				color:#333;
+			}
+		}
+		.note{
+			width:218px;
+			margin:0 auto;
+			margin-top:6px;
+			overflow:hidden;
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			color:#999;
+		}
+	}
+	.activities{
+		.explain{
+			margin:0 24px;
+			margin-top:10px;
+			border:1px solid rgba(0,0,0,.04);
+			padding:5px 8px;
+			display:flex;
+			justify-content:space-between;
+			span{
+				color:#666;
+				i{
+					font-style:normal;
+					display:inline-block;
+					width:27px;
+					line-height:16px;
+					background:rgba(226, 42, 23, 0.79);
+					color:#fff;
+					margin-right:5px;
+				}
+			}
+		}
+		.redEnvelope{
+			margin-top:8px;
+			a{
+				display:inline-block;
+				padding:0 6px 0 7px;
+				margin:0 7px;
+				line-height:25px;
+				img{
+					width:12px;
+					height:12px;
+					vertical-align:middle;
+					margin-bottom:4px;
+					background:yellow;
+				}
+				p{
+					display:inline-block;
+					span{
+						font-size:14px;
+					}
+				}
+			}
+			.left{
+				background:#c3be0fb8;
+				button{
+					border:0;
+					margin-left:8px;
+					background:#c3be0fb8;
+				}
+			}
+			.right{
+				background:#e02f2f;
+				button{
+					border:0;
+					margin-left:8px;
+					background:#e02f2f;
+				}
+			}
+		}
+	}
+}

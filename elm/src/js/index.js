@@ -58,6 +58,8 @@ $(function(){
 			dataType:'jsonp',
 			jsonpCallback:'jsonp',
 			beforeSend:function(){
+				$('.loading').css('top','calc(100vh - 40px - 50px)');
+				$('.restaurant-wrapper').css('height','calc(100vh - 40px - 50px - 25px)');
 				loadingCtrl();
 			},
 			success:function(data){
@@ -68,10 +70,10 @@ $(function(){
 				resScroll.finishPullUp();
 				resScroll.refresh();
 
+				$('.restaurant-wrapper').css('height','calc(100vh - 40px - 50px)');
+				$('.loading').css('top','40px');
 			}
 		});
-
-
 	});
 
 	let cateStep1 = new Promise(function(resolve,reject){
@@ -428,21 +430,18 @@ $(function(){
 
 	//正在加载...loading控制
 	function loadingCtrl(){
-		let loading = $('.loading');
-		let loadingIcon = $('.loading-icon');
-		let state = loading.attr('state');
+		let state = $('.loading').attr('state');
 
 		if(state == 'none'){
-			loading.css('display','block');
-			loading.attr('state','block');
-			loadingIcon.css('animation-play-state','running');
+			$('.loading').css('display','block');
+			$('.loading').attr('state','block');
+			$('.loading-icon').css('animation-play-state','running');
 		}else{
-			loading.css('display','none');
-			loading.attr('state','none');
-			loadingIcon.css('animation-play-state','paused');
+			$('.loading').css('display','none');
+			$('.loading').attr('state','none');
+			$('.loading-icon').css('animation-play-state','paused');
 		}
 	}
-
 
 });
 

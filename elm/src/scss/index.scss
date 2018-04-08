@@ -163,7 +163,7 @@ $headercolor:#0089dc;//头部颜色
 }
 
 .restaurant-wrapper{
-	height:calc(100vh - 35px - 50px);
+	height:calc(100vh - 40px - 50px);
 	overflow:hidden;
 	background:#fff;
 	.content{
@@ -255,11 +255,14 @@ $headercolor:#0089dc;//头部颜色
 		}
 	}
 	.loading{
+		width:100%;
 		font-size:13px;
 		color:#666;
 		text-align:center;
-		display:none;
 		margin-top:15px;
+		position:fixed;
+		left:0;
+		top:40px;
 		.loading-icon{
 			width:15px;
 			height:15px;
