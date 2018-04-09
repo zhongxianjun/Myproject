@@ -1,15 +1,9 @@
+$radiusSize:5px;
+
 .header{
 	position:reletive;
 	width:100%;
 	min-height:68px;
-	span{
-		display:inline-block;
-		margin-left:10px;
-		margin-top:5px;
-		width:25px;
-		height:25px;
-		background:red;
-	}
 	.header_bg{
 		width:100%;
 		height:68px;
@@ -17,6 +11,15 @@
 		left:0;
 		top:0;
 		background:rgba(119,103,137,.43);
+		span{
+			display:inline-block;
+			margin-left:10px;
+			margin-top:5px;
+			width:25px;
+			height:25px;
+			background:url('../images/left.png') center center no-repeat;
+			background-size:24px 24px;
+		}
 	}
 	.logo{
 		width:100%;
@@ -86,39 +89,104 @@
 			margin-top:8px;
 			a{
 				display:inline-block;
-				padding:0 6px 0 7px;
 				margin:0 7px;
-				line-height:25px;
-				img{
-					width:12px;
-					height:12px;
-					vertical-align:middle;
-					margin-bottom:4px;
-					background:yellow;
+				line-height:26px;
+				.crown{
+					display:inline-block;
+					width:16px;
+					padding-left:6px;
+					background:#dea11a4d;
+					img{
+						width:12px;
+						height:12px;
+						vertical-align:middle;
+						margin-bottom:4px;
+						background:yellow;
+					}
 				}
 				p{
 					display:inline-block;
+					padding:0 4px;
+					border-top-right-radius:$radiusSize;
+					border-bottom-right-radius:$radiusSize;
 					span{
 						font-size:14px;
 					}
 				}
+				i{
+					display:inline-block;
+					line-height:26px;
+					font-style:normal;
+					border-top-left-radius:$radiusSize;
+					border-bottom-left-radius:$radiusSize;
+				}
 			}
 			.left{
-				background:#c3be0fb8;
-				button{
-					border:0;
-					margin-left:8px;
-					background:#c3be0fb8;
+				border:1px solid #dea11a4d;
+				color: #594519;
+				p{
+					background:#dea11a4d;
+				}
+				i{
+					background:#dea11a4d;
+					padding:0 11px 0 4px;
 				}
 			}
 			.right{
-				background:#e02f2f;
-				button{
-					border:0;
-					margin-left:8px;
-					background:#e02f2f;
+				border:1px solid #ffc0cb30;
+				p{
+					background:#ffc0cb30;
+					span{
+						color:#ff5339;
+					}
+				}
+				i{
+					padding:0 4px 0 12px;
+					background:#ffc0cb30;
 				}
 			}
 		}
+	}
+}
+
+.tab{
+	width:100%;
+	line-height:40px;
+	text-align:center;
+	display:flex;
+	font-size:16px;
+	margin-top:8px;
+	a{
+		flex:1;
+		&.on{
+			span{
+				color:#333;
+				border-bottom:2px solid #2395ff;
+			}
+		}
+		span{
+			display:inline-block;
+			line-height:40px;
+			color:#666;
+			font-weight:700;
+		}
+	}
+}
+.res{
+	display:none;
+	&.on{
+		display:block;
+	}
+}
+.evaluation{
+	display:none;
+	&.on{
+		display:block;
+	}
+}
+.merchants{
+	display:none;
+	&.on{
+		display:block;
 	}
 }
