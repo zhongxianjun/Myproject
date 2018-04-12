@@ -338,21 +338,47 @@ $radiusSize:5px;
 
 
 .bottom{
+	width:100%;
+	position:fixed;
+	left:0;
+	bottom:0;
+	background:rgba(61,61,63,.9);
 	.full-back{
-
+		background:#fffad6;
+		opacity:.96;
+		border-top: 1px solid #f9e8a3;
+		font-size:12px;
+		text-align:center;
+		line-height:20px;
 	}
 	.sum{
+		padding-left:79px;
+		display:flex;
+		align-items:center;
 		.consumption{
+			flex:1;
 			h3{
-
+				font-size:18px;
+				font-weight:400;
+				color:#fff;
+				line-height:21px;
 			}
 			p{
-				
+				font-size:12px;
+				color:#aaa;
+				line-height:12px;
 			}
 		}
 		a{
+			display:block;
+			width:105px;
+			line-height:48px;
 			span{
-
+				display:block;
+				font-size:16px;
+				font-weight:bold;
+				color:#fff;
+				text-align:center;
 			}
 		}
 	}

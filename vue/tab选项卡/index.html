@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tab选项卡</title>
+	<style type="text/css">
+		.tab{
+			width:100%;
+			line-height:40px;
+			text-align:center;
+			display:flex;
+			font-size:16px;
+			margin-top:8px;
+			border-bottom:1px solid #eee;
+		}
+		.tab a{
+			flex:1;
+		}
+		.tab a.on span{
+			color:#333;
+			border-bottom:2px solid #2395ff;
+		}
+		.tab a span{
+			display:inline-block;
+			line-height:40px;
+			color:#666;
+			font-weight:700;
+		}
+		.tab_index{
+			display:none;
+			text-align: center;
+			margin-top: 100px;
+			font-size:20px;
+			font-weight: bold;
+		}
+		.tab_index.on{
+			display:block;
+		}
+			
+		
+	</style>
+</head>
+<body>
+	<div class="tab">
+		<a href="javascript:void(0);" class="on" index="0"><span>点餐</span></a>
+		<a href="javascript:void(0);" index="1"><span>评价</span></a>
+		<a href="javascript:void(0);" index="2"><span>商家</span></a>
+	</div>
+	<div class="tab_index on">点餐</div>
+	<div class="tab_index">评价</div>
+	<div class="tab_index">商家</div>
+
+	<script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="app/index.js"></script>
+</body>
+</html>
