@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue(备忘录)</title>
+	<style type="text/css">
+		*{padding:0;margin: 0;}
+		#form{
+			display:flex;
+			width:100%;
+			min-height:500px;
+		}
+		#form .left{
+			width: 500px;
+			background:#eee;
+		}
+		input{outline: 0; margin:10px; margin-left:50px; width:200px; line-height:24px; padding:0 5px; font-size:16px;}
+		textarea{outline: 0; margin:10px; margin-left:50px; padding:5px 5px; font-size:16px; resize: none; vertical-align: top; width:300px; height:300px; line-height:20px;}
+		button{background: #ccc;border:0;outline: 0; display:block; font-size:16px; width:150px; line-height:26px; text-align: center; margin-left: 115px}
+		#form ul{
+			list-style: none;
+			flex:1;
+			background:#ccc;
+			min-height:500px;
+		}
+		ul li{
+			margin:10px;
+			margin-left:50px;
+			width:200px; 
+			line-height:24px;
+			font-size: 16px;
+			padding:5px;
+			border-bottom: 1px dotted #eee;
+		}
+	</style>
+</head>
+<body>
+	<div id="form">
+		<div class="left">
+			<input type="text" placeholder="请输入标题" v-model='val'>
+			<textarea placeholder="请输入内容" v-model='tol'></textarea>
+			<button type="button" @click="submit(val,tol)">保　存</button>
+		</div>
+		<ul v-html='content'>
+			
+		</ul>
+
+	</div>
+
+
+	<script type="text/javascript" src="lib/vue.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+</body>
+</html>
