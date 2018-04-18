@@ -1,4 +1,4 @@
-//累加
+//使用vue框架实现 累加计算
 var vm = new Vue({
 	el: '#add',
 	data:{
