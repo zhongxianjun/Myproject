@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>递归</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	#add{
+		width:600px;
+		margin:0 auto;
+		text-align: center;
+	}
+	#add input{
+		outline:0;
+		width:300px;
+		line-height:20px;
+		font-size: 14px;
+		padding:0 5px;
+		margin:10px 0;
+	}
+	#add button{
+		width:150px;
+		line-height:24px;
+		font-size:16px;
+		border:0;
+		background: #ccc;
+		display:block;
+		margin:10px auto;
+		outline:0;
+		color:#118cc3;
+	}
+	</style>
+</head>
+
+<body>
+	<!-- 累加 -->
+	<div id="add">
+		<input type="text" placeholder="输入一个数，实现从1到该数的累加运算" v-model='inVal'>
+		<input type="text" placeholder="运算结果" v-model='outVal'>
+		<button type="button" @click="cumulative(inVal)">进行累加运算</button>
+	</div>
+
+	<script type="text/javascript" src="lib/vue.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+</body>
+</html>
