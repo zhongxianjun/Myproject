@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>index</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	// //1、构造函数
+	// function Dog(name,sex){
+	// 	this.name = name;
+	// 	this.sex = sex;
+	// 	this.spark = function(){
+	// 		console.log('汪汪汪');
+	// 	}	
+	// }
+
+	// var xh = new Dog('xiaohuang','male');
+	// var dh = new Dog('dahuang','famale');
+
+	// console.log(xh === dh); //false
+
+	//2、构造函数与原型方式组合
+	/*function Dog(name,sex){
+		this.name = name;
+		this.sex = sex;
+		if(typeof this.spark != 'function'){
+			Dog.prototype.spark = function(){
+				console.log('汪汪汪');
+			}
+		}
+	}
+
+	var xh = new Dog('xiaohuang','male');
+	var dh = new Dog('dahuang','famale');
+
+	xh.spark();
+	console.log(dh);*/
+
+	//3、寄生构造函数模式
+	/*function Dog(name,sex){
+		var o = new Object();
+		o.name = name;
+		o.sex = sex;
+		o.spark = function(){
+			console.log('汪汪汪');
+		}
+
+		return o;
+	}
+
+	xh = Dog('小黄','male');
+	dh = Dog('大黄','famale');
+	dh.spark();
+	console.log(dh);*/
+
+
+</script>
+</body>
+</html>
