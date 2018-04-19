@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2借用构造函数继承</title>
+</head>
+<body>
+<script type="text/javascript">
+	function Animal(name){
+    	this.type = '动物';
+        this.name = name;
+    }
+	
+
+	function Dog(name){
+        Animal.call(this);
+    	this.name = name;
+    }
+
+    var xh = new Dog('小黄');
+    console.log(xh);
+    console.log(xh.hasOwnProperty('type'));
+
+	
+</script>
+</body>
+</html>

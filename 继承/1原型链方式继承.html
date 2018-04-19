@@ -5,8 +5,20 @@
 </head>
 <body>
 <script type="text/javascript">
+	function Animal(){
+    	this.type = '动物';
+    }
 	
-	
+	Dog.prototype = new Animal;
+
+	function Dog(name){
+    	this.name = name;
+    }
+
+    var xh = new Dog('小黄');
+    console.log(xh);
+    console.log(xh.hasOwnProperty('type'));
+
 	
 </script>
 </body>
