@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>5寄生式继承</title>
+</head>
+<body>
+<script type="text/javascript">
+	function animal(o){
+		function Dog(){};
+		Dog.prototype = o;
+		Dog.prototype.constructor = Dog;
+		return new Dog();
+	}
+
+	function another(o){
+		var clone = animal(o);//clone = new Dog();
+
+		//需要被继承的方法
+		clone.spark = function(){
+			console.log('汪汪汪');
+		}
+		clone.run = function(){
+			console.log('running');
+		}
+	}
+
+	//需要被继承的属性
+    var o = {
+    	type:'动物',
+    	name:'小黄'
+    }
+
+
+    
+
+</script>
+</body>
+</html>

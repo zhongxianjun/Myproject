@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>4原型式继承</title>
+</head>
+<body>
+<script type="text/javascript">
+	function animal(o){
+		function Dog(){};
+		Dog.prototype = o;
+		Dog.prototype.constructor = Dog;
+		return new Dog();
+	}
+	//需要被继承的属性和方法
+	var o = {
+		type:'动物',
+		name:'小黄',
+		run:function(){
+			console.log('running');
+		}
+	}
+
+	var xh = animal(o);//返回一个 new Dog(); ==> xh = new Dog();
+	xh.run();
+	console.log(xh);
+
+
+</script>
+</body>
+</html>

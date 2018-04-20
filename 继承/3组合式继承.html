@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>2借用构造函数继承</title>
+	<title>3组合式继承（伪经典继承）</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -10,15 +10,23 @@
         this.name = name;
     }
 	
-
-	function Dog(name){
-        Animal.call(this);
-    	this.name = name;
+    Animal.prototype.run = function (){
+        console.log('running');
     }
 
-    var xh = new Dog('小黄');
-    console.log(xh);
-    console.log(xh.hasOwnProperty('type'));
+    //原型链方式 实现方法继承
+    Dog.prototype = new Animal();
+    Dog.prototype.constructor = Dog;
+
+	function Dog(age,nickName){
+        //借用构造函数，实现属性继承
+        Animal.call(this,nickName);
+    	this.age = age;
+    }
+    
+    var xh = new Dog(2,'小黄');
+    xh.run();
+    console.log(Dog.prototype.constructor);
 
 	
 </script>
