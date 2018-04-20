@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	function print(){
+		var marty = {
+			name:"marty",
+			printName:function(){console.log(this.name);}
+		}
+		var test1={ name:"test1" };
+		var test2={ name:"test2" };
+		var test3={ name:"test3" };
+		test3.printName=marty.printName;
+
+		var printName2=marty.printName.bind({name:123});
+		marty.printName.call(test1);
+		marty.printName.apply(test2);
+		marty.printName();
+
+		printName2();
+		test3.printName();
+	}
+	print();
+</script>
+</body>
+</html>
