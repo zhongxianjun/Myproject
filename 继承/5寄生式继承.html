@@ -23,6 +23,8 @@
 		clone.run = function(){
 			console.log('running');
 		}
+
+		return clone;
 	}
 
 	//需要被继承的属性
@@ -31,6 +33,9 @@
     	name:'小黄'
     }
 
+    var xh = another(o);
+    console.log(xh);
+    xh.spark();
 
     
 
