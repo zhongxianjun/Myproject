@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>6寄生组合式继承</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+	function object(o){
+    	function F(){};
+    	F.prototype = o;
+    	return new F();
+    }
+
+
+
+	function Animal(name){
+    	this.type = '动物';
+        this.name = name;
+    }
+
+
+    Animal.prototype.run = function(){
+        console.log('running');
+    }
+    Animal.prototype.spark = function(){
+        console.log('汪汪汪');
+    }
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="tab">
+		<div class="tab-nav">
+			<a data-index="0" href="javascript:void(0);">详情</a>
+			<a data-index="1" href="javascript:void(0);">评价</a>
+			<a data-index="2" href="javascript:void(0);">其它</a>
+		</div>
+
+		<div class="tab-con">
+			<div>内容1</div>
+			<div>内容2</div>
+			<div>内容3</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="module/tab.js"></script>
+	<script type="text/javascript">
+	var tab = new Tab({
+		nav:'.tab-nav',
+		con:'.tab-con'
+	});
+
+	</script>
+</body>
+</html>
