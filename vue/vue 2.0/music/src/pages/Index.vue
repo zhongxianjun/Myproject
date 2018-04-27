@@ -26,7 +26,7 @@
 					</h2>
 					<div class="song-container">
 						<ul>
-							<li v-for="(elem,k) in topList">
+							<li v-for="(elem,k) in topList" :key="elem.data.songid">
 								<div class="thumb">
 									<img :src="'https://y.gtimg.cn/music/photo_new/T002R90x90M000'+ elem.data.albummid +'.jpg?max_age=2592000'">
 								</div>
@@ -62,12 +62,13 @@ import jsonp from 'jsonp';
 //引入api接口地址文件
 import api from '../api/indexApi';
 
+//引入better-scroll
+import BScroll from 'better-scroll';
+
 //引入swiper插件
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.min.css';
 
-//引入better-scroll
-import BScroll from 'better-scroll';
 
 export default {
   name: '',

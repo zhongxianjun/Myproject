@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HeaderTab from '@/components/HeaderTab'
 import Index from '@/pages/Index'
+import Singer from '@/pages/Singer'
 
 
 Vue.use(Router)
@@ -19,9 +19,9 @@ export default new Router({
       component: Index
     },
     {
-      path: '/headerTab',
-      name: 'HeaderTab',
-      component: HeaderTab
+      path: '/singer',
+      name: 'Singer',
+      component: Singer
     }
   ]
 })
