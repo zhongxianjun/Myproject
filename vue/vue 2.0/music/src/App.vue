@@ -22,7 +22,7 @@ export default {
 	padding:0;
 	margin:0; 
 }
-h1,h2,h3,h4,h5,h6,body{
+h1,h2,h3,h4,h5,h6,p,body{
   margin: 0;
   padding: 0;
 }
@@ -34,5 +34,6 @@ ul{
 }
 a{
 	text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 </style>
