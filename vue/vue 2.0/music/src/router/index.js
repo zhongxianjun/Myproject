@@ -4,6 +4,7 @@ import Index from '@/pages/Index'
 import Singer from '@/pages/Singer'
 import SingerDetail from '@/pages/SingerDetail'
 import PlayMusic from '@/pages/PlayMusic'
+import Search from '@/pages/Search'
 
 Vue.use(Router)
 
@@ -30,9 +31,14 @@ export default new Router({
       component: SingerDetail
     },
     {
-      path: '/playMusic',
+      path: '/playMusic/:smid/:mid',
       name: 'PlayMusic',
       component: PlayMusic
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search
     }
 
   ]

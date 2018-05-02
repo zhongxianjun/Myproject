@@ -121,6 +121,11 @@ export default {
 	  		//使用swiper插件
 	  		this.$nextTick(function(){
 	  			let mySwiper = new Swiper('.swiper-container',{
+	  				loop:true,
+	  				autoplay: {
+	  					delay:3000,
+	  				},
+	  				effect : 'cube',
 	  				pagination:{
 	  					el:'.swiper-pagination',
 	  					type:'bullets',

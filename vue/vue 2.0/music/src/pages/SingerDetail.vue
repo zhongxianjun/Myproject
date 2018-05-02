@@ -9,7 +9,7 @@
 			<!-- S  歌曲列表 -->
 			<div class="list">
 				<ul>
-					<router-link to="/playMusic" tag="div" v-for="(item,k) in singerDetail.list" :key="item.index">
+					<router-link :to="'/playMusic/'+item.musicData.songmid+'/'+item.musicData.albummid" tag="div" v-for="(item,k) in singerDetail.list" :key="item.index">
 						<li>
 							<h2>{{item.musicData.songname}}</h2>
 							<span>{{item.musicData.singer[0].name}}-{{item.musicData.albumname}}</span>
@@ -22,8 +22,8 @@
 	</div>
 	
 	<!-- S  背景图片 -->
-	<div class="thumb">
-		<img :src="'https://y.gtimg.cn/music/photo_new/T001R300x300M000'+ singerDetail.singer_mid +'.jpg'">
+	<div class="thumb" v-html="thumb">
+		
 	</div>
 	<!-- E  背景图片 -->
 
@@ -46,12 +46,14 @@ import api from '../api/singerApi';
 //引入better-scroll
 import BScroll from 'better-scroll';
 
+
 export default {
   name: '',
   data(){
   	return {
   		singerDetail:{},
   		scroll:null,
+  		thumb:'',
   		loadingState:true,
   		tContent:'歌曲列表加载中...'
   	}
@@ -62,9 +64,11 @@ export default {
   		//获取歌曲列表结构
   		this._getList();
 
+
   		//实例化 better-scroll
   		this.scroll = new BScroll('.list-wrapper',{
-  			scrollY:true
+  			scrollY:true,
+  			click:true
   		});
   	});
   },
@@ -75,6 +79,12 @@ export default {
   			//获取歌曲列表
   			this.singerDetail = data.data;
   			console.log(data.data);
+  		
+  			//动态添加歌手背景照片
+  			this.thumb = `<img src="https://y.gtimg.cn/music/photo_new/T001R300x300M000${data.data.singer_mid}.jpg">`;
+
+	  		//loading隐藏
+	  		this.loadingState = false;
   		});
   	},
   	_getBack(){ //回退功能
@@ -87,7 +97,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../assets/scss/_themes';
 .singer-detail{
 	color:$white;
