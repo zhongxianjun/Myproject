@@ -9,7 +9,7 @@
 			<!-- S  歌曲列表 -->
 			<div class="list">
 				<ul>
-					<router-link :to="'/playMusic/'+item.musicData.songmid+'/'+item.musicData.albummid" tag="div" v-for="(item,k) in singerDetail.list" :key="item.index">
+					<router-link :to="'/playMusic/'+item.musicData.songmid+'/'+item.musicData.albummid" tag="div" @click.native="addSong(item)" v-for="(item,k) in singerDetail.list" :key="item.index">
 						<li>
 							<h2>{{item.musicData.songname}}</h2>
 							<span>{{item.musicData.singer[0].name}}-{{item.musicData.albumname}}</span>
@@ -46,6 +46,8 @@ import api from '../api/singerApi';
 //引入better-scroll
 import BScroll from 'better-scroll';
 
+import {mapGetters,mapMutations} from 'vuex';
+
 
 export default {
   name: '',
@@ -57,6 +59,11 @@ export default {
   		loadingState:true,
   		tContent:'歌曲列表加载中...'
   	}
+  },
+  computed:{
+  	...mapGetters([
+  		'getCurSong'
+  	])
   },
   mounted(){
   	
@@ -78,7 +85,7 @@ export default {
   		jsonp(url,{param:'jsonpCallback'},(err,data)=>{
   			//获取歌曲列表
   			this.singerDetail = data.data;
-  			console.log(data.data);
+  			// console.log(data.data);
   		
   			//动态添加歌手背景照片
   			this.thumb = `<img src="https://y.gtimg.cn/music/photo_new/T001R300x300M000${data.data.singer_mid}.jpg">`;
@@ -89,7 +96,14 @@ export default {
   	},
   	_getBack(){ //回退功能
   		this.$router.go(-1);
-  	}
+  	},
+  	addSong(song){ //点击获取歌曲信息
+  		this.setCurSong(song);
+  		// console.log(song);
+  	},
+  	...mapMutations({
+  		'setCurSong':'setCurSong'
+  	})
   },
   components:{
   	Loading

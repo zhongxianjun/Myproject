@@ -2,8 +2,8 @@
   <div class="play-music">
     <!-- S  头部 -->
 	  <div class="header">
-      <h1><i></i>薛之谦</h1>
-      <span>演员</span>
+      <h1><i @click="_getBack"></i>{{getCurSong.musicData.singer[0].name}}</h1>
+      <span>{{getCurSong.musicData.songname}}</span>
     </div>
     <!-- E  头部 -->
 
@@ -17,7 +17,7 @@
     <div class="play-btn">
       <a href="javascript:void(0);" class="mode"></a>
       <a href="javascript:void(0);" class="prev"></a>
-      <a href="javascript:void(0);" class="playPauseplay"></a>
+      <a href="javascript:void(0);" class="playPauseplay" @click="_playPauseplay"></a>
       <a href="javascript:void(0);" class="next"></a>
       <a href="javascript:void(0);" class="like"></a>
     </div>
@@ -29,11 +29,7 @@
     </div>
     <!-- E  大背景图片 -->
 
-    <!-- S  音乐播放 -->
-    <div class="audio">
-      <audio id="player" :src="src" autoplay="autoplay"></audio>
-    </div>
-    <!-- E  音乐播放 -->
+
   </div>
 </template>
 
@@ -44,18 +40,28 @@ import jsonp from 'jsonp';
 //引入api接口地址文件
 import api from '../api/songApi';
 
+import {mapGetters,mapMutations} from 'vuex';
+
 export default {
   name: '',
   data(){
   	return {
       smid:'',
       mid:'',
-      src:''
+      src:'',
+      palyState:true
   	}
+  },
+  computed:{
+    ...mapGetters([
+      'getPlaySrc',
+      'getCurSong'
+    ])
   },
   created(){
     //获取歌曲播放地址
     this._getMusicAdress();
+
   },
   methods:{
   	_getMusicAdress(){ //歌曲播放地址
@@ -67,13 +73,31 @@ export default {
       let url = api.vKeyApi + `&songmid=${this.smid}&filename=C400${this.smid}.m4a`;
 
       jsonp(url,{param:'callback'},(err,data)=>{
-        console.log(data);
+        // console.log(data);
         let vkey = data.data.items[0].vkey;
         
         //2、使用 smid和vKey取得歌曲播放地址
         this.src = `http://dl.stream.qqmusic.qq.com/C400${this.smid}.m4a?vkey=${vkey}&guid=7120953682&uin=0&fromtag=66`;
+
+        //获取当前播放地址
+        this.setSrc(this.src);
       });
-    }
+    },
+    _getBack(){ //回退功能
+      this.$router.go(-1);
+    },
+    _playPauseplay(){
+      if(this.palyState){
+        console.log('暂停');
+        this.palyState = false;
+      }else{
+        console.log('播放');
+        this.palyState = true;
+      }
+    },
+    ...mapMutations({
+        'setSrc':'setPlaySrc'
+    })
   }
 }
 </script>
@@ -84,7 +108,7 @@ export default {
 	color:$white;
   .header{
     text-align: center;
-    color: #fff;
+    color: $white;
     position: relative;
     z-index: 999;
     h1{

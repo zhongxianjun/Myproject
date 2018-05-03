@@ -1,13 +1,35 @@
 <template>
   <div id="app">
     <router-view/>
+
+  <!-- S  音乐播放 -->
+  <div class="audio">
+    <audio id="player"  :src="getPlaySrc" autoplay="autoplay"></audio>
+  </div>
+  <!-- E  音乐播放 -->
   </div>
 </template>
 
 <script>
+import {mapGetters,mapMutations} from 'vuex';
+
 export default {
-  name: 'App'
+  name: 'App',
+  data(){
+    return{
+
+    }
+  },
+  computed:{
+    ...mapGetters([
+      'getPlaySrc'
+    ])
+  },
+  methods:{
+    
+  }
 }
+
 </script>
 
 <style lang="scss">
