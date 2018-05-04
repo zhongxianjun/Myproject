@@ -7,3 +7,8 @@ export const setPlaySrc = (state,src)=>{
 export const setCurSong = (state,song)=>{
 	state.curSong = song;
 }
+
+//设置当前播放状态
+export const setPalyState = (state,curState)=>{
+	state.palyState = curState;
+}

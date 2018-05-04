@@ -7,3 +7,8 @@ export const getPlaySrc = (state)=>{
 export const getCurSong = (state)=>{
 	return state.curSong;
 }
+
+//获取当前播放状态
+export const getPalyState = (state)=>{
+	return state.palyState;
+}

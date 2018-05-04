@@ -100,9 +100,11 @@ export default {
   	addSong(song){ //点击获取歌曲信息
   		this.setCurSong(song);
   		// console.log(song);
+  		this.setPalyState(false);
   	},
   	...mapMutations({
-  		'setCurSong':'setCurSong'
+  		'setCurSong':'setCurSong',
+  		'setPalyState':'setPalyState'
   	})
   },
   components:{

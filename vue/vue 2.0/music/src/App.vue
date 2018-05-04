@@ -2,16 +2,15 @@
   <div id="app">
     <router-view/>
 
-  <!-- S  音乐播放 -->
-  <div class="audio">
-    <audio id="player"  :src="getPlaySrc" autoplay="autoplay"></audio>
-  </div>
-  <!-- E  音乐播放 -->
+  <!-- S  迷你播放器 -->
+  <MiniPlayer></MiniPlayer>
+  <!-- E  迷你播放器 -->
   </div>
 </template>
 
 <script>
-import {mapGetters,mapMutations} from 'vuex';
+//导入迷你播放器
+import MiniPlayer from '@/components/MiniPlayer';
 
 export default {
   name: 'App',
@@ -20,13 +19,11 @@ export default {
 
     }
   },
-  computed:{
-    ...mapGetters([
-      'getPlaySrc'
-    ])
-  },
   methods:{
     
+  },
+  components:{
+  	MiniPlayer
   }
 }
 

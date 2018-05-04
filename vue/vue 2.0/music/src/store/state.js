@@ -3,5 +3,8 @@ export default {
 	playSrc:'',
 
 	//当前歌曲完整信息
-	curSong:{}
+	curSong:{},
+
+	//当前播放状态
+	palyState:false,
 }

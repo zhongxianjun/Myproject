@@ -1,35 +1,36 @@
 <template>
   <div class="play-music">
-    <!-- S  头部 -->
-	  <div class="header">
-      <h1><i @click="_getBack"></i>{{getCurSong.musicData.singer[0].name}}</h1>
-      <span>{{getCurSong.musicData.songname}}</span>
+    <div class="main">
+      <!-- S  头部 -->
+  	  <div class="header">
+        <h1><i @click="_getBack"></i>{{getCurSong.musicData.singer[0].name}}</h1>
+        <span>{{getCurSong.musicData.songname}}</span>
+      </div>
+      <!-- E  头部 -->
+
+      <!-- S  图片动画 -->
+      <div class="thumb-playing">
+        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+mid+'.jpg?max_age=2592000'">
+      </div>
+      <!-- E  图片动画 -->
+
+      <!-- S  播放按钮 -->
+      <div class="play-btn">
+        <a href="javascript:void(0);" class="mode"></a>
+        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
+        <a href="javascript:void(0);" class="next"></a>
+        <a href="javascript:void(0);" class="like"></a>
+      </div>
+      <!-- S  播放按钮 -->
+
+      <!-- S  大背景图片 -->
+      <div class="bg-album">
+        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+mid+'.jpg?max_age=2592000'">
+      </div>
+      <!-- E  大背景图片 -->
+
     </div>
-    <!-- E  头部 -->
-
-    <!-- S  图片动画 -->
-    <div class="thumb-playing">
-      <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+mid+'.jpg?max_age=2592000'">
-    </div>
-    <!-- E  图片动画 -->
-
-    <!-- S  播放按钮 -->
-    <div class="play-btn">
-      <a href="javascript:void(0);" class="mode"></a>
-      <a href="javascript:void(0);" class="prev"></a>
-      <a href="javascript:void(0);" class="playPauseplay" @click="_playPauseplay"></a>
-      <a href="javascript:void(0);" class="next"></a>
-      <a href="javascript:void(0);" class="like"></a>
-    </div>
-    <!-- S  播放按钮 -->
-
-    <!-- S  大背景图片 -->
-    <div class="bg-album">
-      <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+mid+'.jpg?max_age=2592000'">
-    </div>
-    <!-- E  大背景图片 -->
-
-
   </div>
 </template>
 
@@ -48,14 +49,14 @@ export default {
   	return {
       smid:'',
       mid:'',
-      src:'',
-      palyState:true
+      src:''
   	}
   },
   computed:{
     ...mapGetters([
       'getPlaySrc',
-      'getCurSong'
+      'getCurSong',
+      'getPalyState'
     ])
   },
   created(){
@@ -86,17 +87,23 @@ export default {
     _getBack(){ //回退功能
       this.$router.go(-1);
     },
-    _playPauseplay(){
-      if(this.palyState){
-        console.log('暂停');
-        this.palyState = false;
+    _playPauseplay(){ //控制audio播放与暂停
+      let thumbPlaying = document.querySelector(".thumb-playing");
+      let player = document.querySelector("#player");
+      //控制按钮
+      this.palyState(!this.getPalyState);
+      //控制播放功能与动画
+      if(!this.getPalyState){
+        thumbPlaying.style.animationPlayState = 'running';
+        player.play();  
       }else{
-        console.log('播放');
-        this.palyState = true;
+        thumbPlaying.style.animationPlayState = 'paused';
+        player.pause();
       }
     },
     ...mapMutations({
-        'setSrc':'setPlaySrc'
+        'setSrc':'setPlaySrc',
+        'palyState':'setPalyState'
     })
   }
 }
@@ -106,6 +113,10 @@ export default {
 @import '../assets/scss/_themes';
 .play-music{
 	color:$white;
+  .main{
+    position: relative;
+    z-index: 1010;
+  }
   .header{
     text-align: center;
     color: $white;
@@ -178,6 +189,10 @@ export default {
         background:url("../assets/icon/pause.png") no-repeat;
         background-size: 100% 100%;
       }
+      &.pausePlay{
+        background:url("../assets/icon/play.png") no-repeat;
+        background-size: 100% 100%;
+      }
       &.next{
         background:url("../assets/icon/next.png") no-repeat;
         background-size: 100% 100%;
@@ -196,6 +211,7 @@ export default {
     left:0;
     width: 100%;
     transform-origin: center center;
+    background:$black;
     img{
       width: 100%;
       height: 100vh;
