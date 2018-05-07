@@ -40,6 +40,5 @@ export default new Router({
       name: 'Search',
       component: Search
     }
-
   ]
 })

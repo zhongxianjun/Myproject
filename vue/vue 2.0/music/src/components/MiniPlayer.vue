@@ -14,7 +14,7 @@
  
    	<div class="song-operator">
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
-   		<a href="javascript:void(0);" class="song-list"></a>
+   		<SongList></SongList>
    	</div>
    	<!-- E 歌曲信息 -->
 
@@ -26,7 +26,11 @@
 </template>
 
 <script>
+//导入songList 子组件
+import SongList from '@/components/SongList';
+
 import {mapGetters,mapMutations} from 'vuex';
+
 export default {
   name: '',
   data(){
@@ -43,7 +47,7 @@ export default {
   },
   watch:{
   	getPalyState(){
-		this._playOrPause();
+		  this._playOrPause();
   	}
   },
   methods:{
@@ -64,10 +68,16 @@ export default {
         player.pause();
       }
     },
+    _songListSwitch(){
+
+    },
     ...mapMutations({
         'setSrc':'setPlaySrc',
         'palyState':'setPalyState'
     })
+  },
+  components:{
+    SongList
   }
 }
 </script>
