@@ -7,15 +7,18 @@
    	<!-- E 歌曲封面 -->
 
    	<!-- S 歌曲信息 -->
-   	<div class="song-info">
-   		<h3>{{getCurSong.musicData.singer[0].name}}</h3>
-   		<span>{{getCurSong.musicData.songname}}</span>
-   	</div>
- 
+    <div class="song-info">
+      <router-link :to="'/playMusic/'+getCurSong.musicData.songmid+'/'+getCurSong.musicData.albummid" tag="div">
+     		<h3>{{getCurSong.musicData.singer[0].name}}</h3>
+     		<span>{{getCurSong.musicData.songname}}</span>
+      </router-link>
+    </div>
+
    	<div class="song-operator">
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
-   		<SongList></SongList>
+      <a href="javascript:void(0);" class="song-list" @click="openSongList"></a>
    	</div>
+    <SongList :switchState="switchState" @closeState="closeState"></SongList>
    	<!-- E 歌曲信息 -->
 
    	<!-- 播放器 -->
@@ -35,7 +38,7 @@ export default {
   name: '',
   data(){
     return {
-    
+      switchState:false
     }
   },
   computed:{
@@ -68,8 +71,11 @@ export default {
         player.pause();
       }
     },
-    _songListSwitch(){
-
+    closeState:function(s){
+      this.switchState = s;
+    },
+    openSongList(){
+      this.switchState = true;
     },
     ...mapMutations({
         'setSrc':'setPlaySrc',

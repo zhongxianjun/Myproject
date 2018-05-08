@@ -1,6 +1,6 @@
 <template>
 	<transition name="songlist">	
-	  <div class="song-list">
+	  <div class="song-list" v-show="switchState" @click.self="close">
 	  	 <div class="list-operator">
 	  	 	<span class="play-mode">
 		  	 	<i></i>
@@ -14,40 +14,52 @@
 				<div class="list-con">
 					<div class="songs">
 						<ul>
-							<router-link to="">
-							<li>
+							<li v-for="">
 								<span class="song-name cur"></span> 
 								<span class="song-operator">
 									<i class="icon-op icon-favorate"></i> 
 									<i class="icon-op icon-delete"></i>
 								</span>
 							</li>
-							</router-link>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="close-list" @click="">关闭列表</div>
+		<div class="close-list" @click="close">关闭列表</div>
 	  </div>
 	</transition>
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex';
 export default {
   name: '',
   data(){
     return {
-    
+    	songListArray:[]
     }
   },
   computed:{
-
+  	...mapGetters([
+  		'getCurSong'
+  	])
+  },
+  props:{
+  	switchState:{
+  		type:Boolean,
+  		default:true
+  	}
   },
   methods:{
-  	
+  	close(){
+  		this.$emit('closeState',false);
+  	},
+
+  },
+  components:{
+
   }
 }
 </script>
