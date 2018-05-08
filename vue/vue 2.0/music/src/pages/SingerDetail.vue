@@ -62,7 +62,8 @@ export default {
   },
   computed:{
   	...mapGetters([
-  		'getCurSong'
+  		'getCurSong',
+  		'getSongListArr'
   	])
   },
   mounted(){
@@ -99,12 +100,34 @@ export default {
   	},
   	addSong(song){ //点击获取歌曲信息
   		this.setCurSong(song);
-  		// console.log(song);
+  		
+  		// 初始化播放状态
   		this.setPalyState(false);
+
+  		//进去列表的歌曲去重
+  		let tempArr = this.getSongListArr;
+  		let numFlag = 0;
+  		tempArr.forEach((elem,i)=>{
+  			if(elem.musicData.songid == song.musicData.songid){
+  				numFlag++;
+  				this.setCurIndex(i);
+  			}
+  		});
+
+  		if(numFlag <= 0){
+  			this.setCurIndex(tempArr.length);
+  			this.setSongListArr(song);
+  		}
+  		
+  		
+  		
+  		
   	},
   	...mapMutations({
   		'setCurSong':'setCurSong',
-  		'setPalyState':'setPalyState'
+  		'setPalyState':'setPalyState',
+  		'setSongListArr':'setSongListArr',
+  		'setCurIndex':'setCurIndex'
   	})
   },
   components:{

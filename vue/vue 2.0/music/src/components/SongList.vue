@@ -14,13 +14,15 @@
 				<div class="list-con">
 					<div class="songs">
 						<ul>
-							<li v-for="">
-								<span class="song-name cur"></span> 
-								<span class="song-operator">
-									<i class="icon-op icon-favorate"></i> 
-									<i class="icon-op icon-delete"></i>
-								</span>
-							</li>
+							<router-link :to="'/playMusic/'+item.musicData.songmid+'/'+item.musicData.albummid" tag="div" v-for="(item,k) in getSongListArr" :key="item.musicData.songid" @click.native="playListMusic">
+								<li :class="{active:getCurIndex == k}">
+									<span class="song-name" v-text="item.musicData.songname"></span>
+									<span class="song-operator">
+										<i class="icon-op icon-favorate"></i> 
+										<i class="icon-op icon-delete"></i>
+									</span>
+								</li>
+							</router-link>
 						</ul>
 					</div>
 				</div>
@@ -33,17 +35,18 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
 export default {
   name: '',
   data(){
     return {
-    	songListArray:[]
+    	
     }
   },
   computed:{
   	...mapGetters([
-  		'getCurSong'
+  		'getCurIndex',
+  		'getSongListArr'
   	])
   },
   props:{
@@ -56,10 +59,18 @@ export default {
   	close(){
   		this.$emit('closeState',false);
   	},
+  	playListMusic(){
+  		/*this.getSongListArr.forEach((item,s)=>{
+  			this.setCurIndex(s);
+  		});*/
+  	},
+  	...mapMutations({
+  		'setCurIndex':'setCurIndex'
+  	})
 
   },
   components:{
-
+  	
   }
 }
 </script>

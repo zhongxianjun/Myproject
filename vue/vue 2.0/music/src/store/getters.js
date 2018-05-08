@@ -12,3 +12,13 @@ export const getCurSong = (state)=>{
 export const getPalyState = (state)=>{
 	return state.palyState;
 }
+
+//获取当前歌曲列表数组
+export const getSongListArr = (state)=>{
+	return state.songListArr;
+}
+
+//获取当前歌曲列表索引
+export const getCurIndex = (state)=>{
+	return state.curIndex;
+}
