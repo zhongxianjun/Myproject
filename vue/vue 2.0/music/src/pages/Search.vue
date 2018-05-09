@@ -112,7 +112,7 @@ export default {
       let url = api.searchApi + this.keywords;
       jsonp(url,{param:'jsonpCallback'},(err,data)=>{
         this.searchMusicList = data.data
-        console.log(this.searchMusicList);
+        // console.log(this.searchMusicList);
       });
     },
 
@@ -137,9 +137,6 @@ export default {
         this.setCurIndex(tempArr.length);
         this.setSongListArr(song);
       }
-      
-      
-      
       
     },
 

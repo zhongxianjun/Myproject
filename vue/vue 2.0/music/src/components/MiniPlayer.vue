@@ -14,6 +14,7 @@
 
    	<div class="song-operator" @click.stop>
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
+      <a href="javascript:void(0);" class="next"></a>
       <a href="javascript:void(0);" class="song-list" @click="openSongList"></a>
    	</div>
     <SongList :switchState="switchState" @closeState="closeState"></SongList>
@@ -137,24 +138,30 @@ export default {
   }
   .song-operator{
   	margin-right:10px;
-    line-height:40px;
-  	.playPauseplay,.song-list{
-		width:30px;
-		height:30px;
-    margin-top:15px;
-		display: inline-block;
+    height:60px;
+    display:flex;
+    align-items:center;
+  	.playPauseplay,.next,.song-list{
+      flex:1;
+  		width:30px;
+  		height:30px;
+      margin:0 5px;
+  		display: inline-block;
   	}
     .playPauseplay{
-		margin-right:16px;
-		background:url(../assets/icon/pause.png) no-repeat;
-		background-size:100% 100%;
+  		background:url(../assets/icon/pause.png) no-repeat;
+  		background-size:100% 100%;
     }
     .pausePlay{
     	background:url(../assets/icon/play.png) no-repeat;
     	background-size:100% 100%;
     }
+    .next{
+      background:url(../assets/icon/next.png) no-repeat;
+      background-size:100% 100%;
+    }
   	.song-list{
-		background:url(../assets/icon/list.png) no-repeat;
+		  background:url(../assets/icon/list.png) no-repeat;
   		background-size:100% 100%;
   	}
   }
