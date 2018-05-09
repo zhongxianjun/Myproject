@@ -1,35 +1,46 @@
 <template>
-  <div class="">
+  <div class="search">
+    <!-- S  头部 -->
     <HeaderTab></HeaderTab>
+    <!-- E  头部 -->
 
+    <!-- S  搜索 -->
     <div class="search-wrap">
       <div class="search-form">
         <input placeholder="搜索歌曲、歌手" v-model="keywords">
         <i class="delete" @click="emptySearch"></i>
       </div>
 
+      <!-- S  热门搜索 -->
       <div class="hotkey" v-if="!showState">
         <h2>热门搜索</h2>
         <div class="hotkey-list">
           <span v-for="(song,i) in hotMusicList" :key="song.n" v-text="song.k" @click="searchHotMusic(song.k)"></span>
         </div>
       </div>
+      <!-- E  热门搜索 -->
   
       <div class="song-wrapper">
         <div class="content">
+          <!-- S  搜索列表 -->
           <div class="song-list" v-if="showState">
             <ul>
               <!-- S 歌手直达 -->
+              <router-link :to="'/singer/'+searchMusicList.zhida.singermid" v-if="searchMusicList.zhida.type">
                 <li class="singer" v-text="searchMusicList.zhida.singername"></li>
+              </router-link>
               <!-- E 歌手直达 -->
 
-                <li v-for="(item,k) in searchMusicList.song.list">{{item.songname}}-{{item.singer[0].name}}</li>
+              <router-link :to="'/playMusic/'+ item.songmid +'/'+ item.albummid" v-for="(item,k) in searchMusicList.song.list" :key="item.songid" @click.native="addSong(item)">
+                <li>{{item.songname}}-{{item.singer[0].name}}</li>
+              </router-link>
             </ul>
           </div>
+          <!-- E  搜索列表 -->
         </div>
       </div>
     </div>
-    
+    <!-- E  搜索 -->
   </div>
 </template>
 
@@ -46,6 +57,8 @@ import api from '../api/searchApi';
 //引入better-scroll
 import BScroll from 'better-scroll';
 
+import {mapGetters,mapMutations} from 'vuex';
+
 export default {
   name: '',
   data(){
@@ -53,15 +66,16 @@ export default {
       hotMusicList:[],
       keywords:'',
       searchMusicList:[],
-      zhidaState:false,
-      musicListState:false,
       scroll:''
   	}
   },
   computed:{
-    showState(){
-      return this.keywords == '' ? false : true;
-    }
+      showState(){
+        return this.keywords == '' ? false : true;
+      },
+      ...mapGetters([
+        'getSongListArr'
+      ])
   },
   watch:{
     keywords(){
@@ -98,9 +112,43 @@ export default {
       let url = api.searchApi + this.keywords;
       jsonp(url,{param:'jsonpCallback'},(err,data)=>{
         this.searchMusicList = data.data
-        // console.log(data);
+        console.log(this.searchMusicList);
       });
     },
+
+    addSong(song){ //点击获取歌曲信息
+      song = {musicData:song};
+      this.setCurSong(song);
+      
+      // 初始化播放状态
+      this.setPalyState(false);
+
+      //进去列表的歌曲去重
+      let tempArr = this.getSongListArr;
+      let numFlag = 0;
+      tempArr.forEach((elem,i)=>{
+        if(elem.musicData.songid == song.musicData.songid){
+          numFlag++;
+          this.setCurIndex(i);
+        }
+      });
+
+      if(numFlag <= 0){
+        this.setCurIndex(tempArr.length);
+        this.setSongListArr(song);
+      }
+      
+      
+      
+      
+    },
+
+    ...mapMutations({
+      'setCurSong':'setCurSong',
+      'setCurIndex':'setCurIndex',
+      'setSongListArr':'setSongListArr',
+      'setPalyState':'setPalyState'
+    })
   },
   components:{
   	HeaderTab
