@@ -1,6 +1,6 @@
 <template>
 	<transition name="songlist">	
-	  <div class="song-list" v-show="switchState" @click.self="close">
+	  <div class="song-list" v-show="switchState" @click.stop.self="close">
 	  	 <div class="list-operator">
 	  	 	<span class="play-mode">
 		  	 	<i></i>
@@ -14,12 +14,12 @@
 				<div class="list-con">
 					<div class="songs">
 						<ul>
-							<router-link :to="'/playMusic/'+item.musicData.songmid+'/'+item.musicData.albummid" tag="div" v-for="(item,k) in getSongListArr" :key="item.musicData.songid" @click.native="playListMusic">
+							<router-link :to="'/playMusic/'+item.musicData.songmid+'/'+item.musicData.albummid" tag="div" v-for="(item,k) in getSongListArr" :key="item.musicData.songid" @click.native="playListMusic(item,k)">
 								<li :class="{active:getCurIndex == k}">
 									<span class="song-name" v-text="item.musicData.songname"></span>
-									<span class="song-operator">
+									<span class="song-operator" @click.stop>
 										<i class="icon-op icon-favorate"></i> 
-										<i class="icon-op icon-delete"></i>
+										<i class="icon-op icon-delete" @click="deleteSong"></i>
 									</span>
 								</li>
 							</router-link>
@@ -56,16 +56,22 @@ export default {
   	}
   },
   methods:{
-  	close(){
+  	close(){ //关闭列表
   		this.$emit('closeState',false);
   	},
-  	playListMusic(){
-  		/*this.getSongListArr.forEach((item,s)=>{
-  			this.setCurIndex(s);
-  		});*/
+
+  	playListMusic(item,k){ //播放列表中的歌曲
+  		this.setCurSong(item);
+  		this.setCurIndex(k);
   	},
+
+  	deleteSong(){ //删除列表中的歌曲
+  		console.log('删除');
+  	},
+
   	...mapMutations({
-  		'setCurIndex':'setCurIndex'
+  		'setCurIndex':'setCurIndex',
+  		'setCurSong':'setCurSong'
   	})
 
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="mini-player">
+  <div class="mini-player" @click="toPlayMusic">
    	<!-- S 歌曲封面 -->
    	<div class="thumb playing">
    		<img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+ getCurSong.musicData.albummid +'.jpg'">
@@ -8,13 +8,11 @@
 
    	<!-- S 歌曲信息 -->
     <div class="song-info">
-      <router-link :to="'/playMusic/'+getCurSong.musicData.songmid+'/'+getCurSong.musicData.albummid" tag="div">
      		<h3>{{getCurSong.musicData.singer[0].name}}</h3>
      		<span>{{getCurSong.musicData.songname}}</span>
-      </router-link>
     </div>
 
-   	<div class="song-operator">
+   	<div class="song-operator" @click.stop>
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
       <a href="javascript:void(0);" class="song-list" @click="openSongList"></a>
    	</div>
@@ -54,12 +52,12 @@ export default {
   	}
   },
   methods:{
-  	_playPauseplay(){ //控制audio播放与暂停
+  	_playPauseplay(){ //控制图标播放与暂停
       
       //控制按钮
       this.palyState(!this.getPalyState);
     },
-    _playOrPause(){
+    _playOrPause(){ //控制audio播放与暂停
       let thumbPlaying = document.querySelector(".thumb.playing");
       let player = document.querySelector("#player");
       //控制播放功能与动画
@@ -71,12 +69,20 @@ export default {
         player.pause();
       }
     },
-    closeState:function(s){
-      this.switchState = s;
+
+    toPlayMusic(){ //点击进入歌曲播放页面
+      let song = this.getCurSong;
+      this.$router.push({path:'/playMusic/'+song.musicData.songmid+'/'+song.musicData.albummid});
     },
-    openSongList(){
+
+    closeState(){ //关闭开关
+      this.switchState = false;
+    },
+
+    openSongList(){ //打开开关
       this.switchState = true;
     },
+
     ...mapMutations({
         'setSrc':'setPlaySrc',
         'palyState':'setPalyState'
@@ -131,9 +137,11 @@ export default {
   }
   .song-operator{
   	margin-right:10px;
+    line-height:40px;
   	.playPauseplay,.song-list{
 		width:30px;
-		height:30px;	
+		height:30px;
+    margin-top:15px;
 		display: inline-block;
   	}
     .playPauseplay{
