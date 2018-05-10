@@ -22,3 +22,8 @@ export const setSongListArr = (state,song)=>{
 export const setCurIndex = (state,curI)=>{
 	state.curIndex = curI;
 }
+
+//设置当前迷你播放器状态
+export const setMiniState = (state,mState)=>{
+	state.miniState = mState;
+}

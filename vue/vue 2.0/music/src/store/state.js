@@ -12,5 +12,8 @@ export default {
 	songListArr:[],
 
 	//歌曲列表中当前索引
-	curIndex:0
+	curIndex:0,
+
+	//迷你播放器显示状态
+	miniState:false
 }

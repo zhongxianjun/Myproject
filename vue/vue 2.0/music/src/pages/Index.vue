@@ -26,18 +26,16 @@
 					</h2>
 					<div class="song-container">
 						<ul>
-							<router-link :to="'/playMusic/'+elem.musicData.songmid+'/'+elem.musicData.albummid" tag="div" v-for="(elem,k) in topList" :key="elem.data.songid">
-								<li>
-									<div class="thumb">
-										<img :src="'https://y.gtimg.cn/music/photo_new/T002R90x90M000'+ elem.data.albummid +'.jpg?max_age=2592000'">
-									</div>
-									<div class="text-info">
-										<h3>{{elem.data.songname}}</h3>
-										<p>{{elem.data.singer[0].name}}</p>
-									</div>
-									<div class="play-time">{{elem.data.interval | getTime}}</div>
-								</li>
-							</router-link>
+							<li v-for="(elem,k) in topList" :key="elem.data.songid" @click="playAddMusic(elem)">
+								<div class="thumb">
+									<img :src="'https://y.gtimg.cn/music/photo_new/T002R90x90M000'+ elem.data.albummid +'.jpg?max_age=2592000'">
+								</div>
+								<div class="text-info">
+									<h3>{{elem.data.songname}}</h3>
+									<p>{{elem.data.singer[0].name}}</p>
+								</div>
+								<div class="play-time">{{elem.data.interval | getTime}}</div>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -71,6 +69,8 @@ import BScroll from 'better-scroll';
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.min.css';
 
+import {mapGetters,mapMutations} from 'vuex';
+
 
 export default {
   name: '',
@@ -83,6 +83,11 @@ export default {
   		loadingState:true,
   		tContent:'歌曲列表加载...'
   	}
+  },
+  computed:{
+  	...mapGetters([
+  		'getSongListArr'
+  	])
   },
   mounted:function(){
   	//获取轮播图
@@ -146,7 +151,41 @@ export default {
 			this.topList = this.topList.concat(data.songlist);
 			this.loadingState = false;
 		});
-	}
+	},
+
+	playAddMusic(song){
+		//将data属性更改为musicData，再获取歌曲信息
+		let data = song.data;
+		song = {musicData:data};
+		this.setCurSong(song);
+
+		//初始化播放状态
+		this.setPalyState(false);
+
+		//进去列表的歌曲去重
+	    let tempArr = this.getSongListArr;
+	    let numFlag = 0;
+	    tempArr.forEach((elem,i)=>{
+		    if(elem.musicData.songid == song.musicData.songid){
+		        numFlag++;
+		        this.setCurIndex(i);
+		    }
+	    });
+
+	    if(numFlag <= 0){
+	        this.setCurIndex(tempArr.length);
+	        this.setSongListArr(song);
+	    }
+	    //路由跳转到歌曲播放页面
+		this.$router.push({path:'/playMusic/'+song.musicData.songmid+'/'+song.musicData.albummid});
+	},
+
+	...mapMutations({
+		'setCurSong':'setCurSong',
+		'setSongListArr':'setSongListArr',
+		'setCurIndex':'setCurIndex',
+		'setPalyState':'setPalyState'
+	})
   },
   components:{
   	HeaderTab,

@@ -26,9 +26,7 @@
           <div class="song-list" v-if="showState">
             <ul>
               <!-- S 歌手直达 -->
-              <router-link :to="'/singer/'+searchMusicList.zhida.singermid" v-if="searchMusicList.zhida.type">
-                <li class="singer" v-text="searchMusicList.zhida.singername"></li>
-              </router-link>
+                <li class="singer" v-if="searchMusicList.zhida.type" v-text="searchMusicList.zhida.singername" @click="searchSinger(searchMusicList)"></li>
               <!-- E 歌手直达 -->
 
               <router-link :to="'/playMusic/'+ item.songmid +'/'+ item.albummid" v-for="(item,k) in searchMusicList.song.list" :key="item.songid" @click.native="addSong(item)">
@@ -65,14 +63,12 @@ export default {
   	return {
       hotMusicList:[],
       keywords:'',
-      searchMusicList:[],
-      scroll:''
+      searchMusicList:{},
+      scroll:'',
+      showState:false
   	}
   },
   computed:{
-      showState(){
-        return this.keywords == '' ? false : true;
-      },
       ...mapGetters([
         'getSongListArr'
       ])
@@ -113,7 +109,22 @@ export default {
       jsonp(url,{param:'jsonpCallback'},(err,data)=>{
         this.searchMusicList = data.data
         // console.log(this.searchMusicList);
+        
+        if(this.keywords == ''){
+			this.showState = false;
+        }else{
+			this.showState = true;
+        }
       });
+    },
+
+    searchSinger(song){ //搜索歌手信息，并跳转到歌手详情页面
+    	if(song.zhida.type == 2){
+			this.$router.push({path:'/singer/'+song.zhida.singermid});
+    	}else{
+    		alert('未搜索到该歌手信息');
+    	}
+    	
     },
 
     addSong(song){ //点击获取歌曲信息

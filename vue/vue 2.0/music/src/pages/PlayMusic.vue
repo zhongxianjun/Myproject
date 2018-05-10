@@ -17,9 +17,9 @@
       <!-- S  播放按钮 -->
       <div class="play-btn">
         <a href="javascript:void(0);" class="mode"></a>
-        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="prev" @click="prev"></a>
         <a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
-        <a href="javascript:void(0);" class="next"></a>
+        <a href="javascript:void(0);" class="next" @click="next"></a>
         <a href="javascript:void(0);" class="like"></a>
       </div>
       <!-- S  播放按钮 -->
@@ -56,7 +56,8 @@ export default {
     ...mapGetters([
       'getPlaySrc',
       'getCurSong',
-      'getPalyState'
+      'getPalyState',
+      'getCurIndex'
     ])
   },
   created(){
@@ -83,10 +84,14 @@ export default {
         //获取当前播放地址
         this.setSrc(this.src);
       });
+
+      this.setMiniState(true);
     },
+
     _getBack(){ //回退功能
       this.$router.go(-1);
     },
+
     _playPauseplay(){ //控制audio播放与暂停
       let thumbPlaying = document.querySelector(".thumb-playing");
       let player = document.querySelector("#player");
@@ -101,9 +106,26 @@ export default {
         player.pause();
       }
     },
+
+    prev(){ //播放上一曲
+      let num = 0;
+      num = this.getCurIndex;
+      num--;
+      this.setCurIndex(num);
+    },
+
+    next(){ //播放下一曲
+      let num = 0;
+      num = this.getCurIndex;
+      num++;
+      this.setCurIndex(num);
+    },
+
     ...mapMutations({
         'setSrc':'setPlaySrc',
-        'palyState':'setPalyState'
+        'palyState':'setPalyState',
+        'setMiniState':'setMiniState',
+        'setCurIndex':'setCurIndex'
     })
   }
 }

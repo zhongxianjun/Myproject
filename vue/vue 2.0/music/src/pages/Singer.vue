@@ -7,7 +7,7 @@
 	<div class="wrapper singer-wrapper">
 		<div class="content">
 			<!-- S  歌手列表 -->
-			<div class="singer-item" v-for="(s,k) in singerList" :key="k">
+			<div class="singer-item" v-for="(s,k) in singerList" :key="k" v-if="showState">
 				<h3>{{s.index}}</h3>
 				<ul>
 					<router-link :to="'/singer/'+singer.Fsinger_mid" tag="div" v-for="(singer,i) in s.singer" :key="i">
@@ -22,7 +22,7 @@
 		</div>
 
 		<!-- S  索引导航 -->
-		<div class="index-tool">
+		<div class="index-tool" v-if="showState">
 			<ul>
 				<li v-for="(item,j) in indexTool" :key="j" :class="{active:curIndex == j}" v-text="item"></li>
 			</ul>
@@ -58,6 +58,7 @@ export default {
   	return {
   		singerList:[{index:'热门',singer:[]}],
   		indexTool:null,
+  		showState:false,
   		scroll:null,
   		loadingState:true,
   		tContent:'歌手列表加载...',
@@ -120,18 +121,25 @@ export default {
   			this.singerList.push(temp);
   		}
 
-  		//剔除没有内容的歌手结构 及 索引
-  		this.singerList.map((item,index)=>{
-  			let len = item.singer.length;
-	  		if(len <= 0){
-	  			this.singerList.splice(index,1);
-	  			this.indexTool.splice(index,1);
-	  		}
 
-  		})
+  		//剔除没有内容的歌手结构 及 索引
+  		let tempIndexArr = []
+		let tempSingerArr = [];
+  		this.singerList.map((item,index)=>{
+	  		let len = item.singer.length;
+	  		if(len > 0){
+	  			tempSingerArr.push(item);
+	  			tempIndexArr.push(item.index.slice(0, 1));
+	  		}
+  		});
+  		this.singerList = tempSingerArr;
+  		this.indexTool = tempIndexArr;
+
 
   		//loading状态值的更改
   		this.loadingState = false;
+
+  		this.showState = true;
   	},
 
   	_getIndexTool(){ //生成index歌曲索引

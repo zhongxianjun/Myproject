@@ -22,3 +22,8 @@ export const getSongListArr = (state)=>{
 export const getCurIndex = (state)=>{
 	return state.curIndex;
 }
+
+//获取当前迷你播放器状态
+export const getMiniState = (state)=>{
+	return state.miniState;
+}
