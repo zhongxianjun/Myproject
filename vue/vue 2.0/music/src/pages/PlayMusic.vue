@@ -57,7 +57,8 @@ export default {
       'getPlaySrc',
       'getCurSong',
       'getPalyState',
-      'getCurIndex'
+      'getCurIndex',
+      'getSongListArr'
     ])
   },
   created(){
@@ -112,6 +113,11 @@ export default {
       num = this.getCurIndex;
       num--;
       this.setCurIndex(num);
+      this.getSongListArr.forEach((item,i)=>{
+        if(item.index == num){
+          this.setCurSong(item);
+        }
+      });
     },
 
     next(){ //播放下一曲
@@ -125,7 +131,8 @@ export default {
         'setSrc':'setPlaySrc',
         'palyState':'setPalyState',
         'setMiniState':'setMiniState',
-        'setCurIndex':'setCurIndex'
+        'setCurIndex':'setCurIndex',
+        'setCurSong':'setCurSong'
     })
   }
 }
