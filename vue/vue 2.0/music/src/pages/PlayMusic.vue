@@ -112,6 +112,12 @@ export default {
     },
 
     prev(){ //播放上一曲
+      //重置播放状态
+      this.palyState(false);
+      let thumbPlaying = document.querySelector(".thumb-playing");
+      thumbPlaying.style.animationPlayState = 'running';
+
+      //更换 播放地址 歌曲信息
       let num = 0;
       num = this.getCurIndex;
       if(num == 0){
@@ -129,6 +135,12 @@ export default {
     },
 
     next(){ //播放下一曲
+      //重置播放状态
+      this.palyState(false);
+      let thumbPlaying = document.querySelector(".thumb-playing");
+      thumbPlaying.style.animationPlayState = 'running';
+
+      //更换 播放地址 歌曲信息
       let num = 0;
       num = this.getCurIndex;
       if(num == this.getSongListArr.length-1){
