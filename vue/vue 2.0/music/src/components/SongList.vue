@@ -74,9 +74,6 @@ export default {
   		'setCurSong':'setCurSong'
   	})
 
-  },
-  components:{
-  	
   }
 }
 </script>

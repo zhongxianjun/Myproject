@@ -30,6 +30,7 @@
 <script>
 //导入songList 子组件
 import SongList from '@/components/SongList';
+import PlayMusic from '@/pages/PlayMusic';
 
 import {mapGetters,mapMutations} from 'vuex';
 
@@ -91,7 +92,8 @@ export default {
     })
   },
   components:{
-    SongList
+    SongList,
+    PlayMusic
   }
 }
 </script>

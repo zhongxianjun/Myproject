@@ -10,7 +10,7 @@
 
       <!-- S  图片动画 -->
       <div class="thumb-playing">
-        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+mid+'.jpg?max_age=2592000'">
+        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+getCurSong.musicData.albummid+'.jpg?max_age=2592000'">
       </div>
       <!-- E  图片动画 -->
 
@@ -26,7 +26,7 @@
 
       <!-- S  大背景图片 -->
       <div class="bg-album">
-        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+mid+'.jpg?max_age=2592000'">
+        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+getCurSong.musicData.albummid+'.jpg?max_age=2592000'">
       </div>
       <!-- E  大背景图片 -->
 
@@ -63,14 +63,16 @@ export default {
   },
   created(){
     //获取歌曲播放地址
-    this._getMusicAdress();
-
-  },
-  methods:{
-  	_getMusicAdress(){ //歌曲播放地址
       //获取路由参数 smid歌曲 mid , 专辑封面 mid
       this.smid = this.$route.params.smid;
       this.mid = this.$route.params.mid;
+    this._getMusicAdress(this.smid,this.mid);
+
+  },
+  methods:{
+  	_getMusicAdress(s,m){ //歌曲播放地址
+      this.smid = s;
+      this.mid = m;
 
       //1、获取 vkey
       let url = api.vKeyApi + `&songmid=${this.smid}&filename=C400${this.smid}.m4a`;
@@ -84,6 +86,7 @@ export default {
 
         //获取当前播放地址
         this.setSrc(this.src);
+        // console.log(this.src);
       });
 
       this.setMiniState(true);
@@ -111,11 +114,16 @@ export default {
     prev(){ //播放上一曲
       let num = 0;
       num = this.getCurIndex;
-      num--;
+      if(num == 0){
+        num = this.getSongListArr.length-1;
+      }else{
+        num--;
+      }
       this.setCurIndex(num);
       this.getSongListArr.forEach((item,i)=>{
-        if(item.index == num){
+        if(num == i){
           this.setCurSong(item);
+          this._getMusicAdress(item.musicData.songmid,item.musicData.albummid);
         }
       });
     },
@@ -123,8 +131,18 @@ export default {
     next(){ //播放下一曲
       let num = 0;
       num = this.getCurIndex;
-      num++;
+      if(num == this.getSongListArr.length-1){
+        num = 0;
+      }else{
+        num++;
+      }
       this.setCurIndex(num);
+      this.getSongListArr.forEach((item,i)=>{
+        if(num == i){
+          this.setCurSong(item);
+          this._getMusicAdress(item.musicData.songmid,item.musicData.albummid);
+        }
+      });
     },
 
     ...mapMutations({
