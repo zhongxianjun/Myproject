@@ -4,7 +4,8 @@ import '../scss/index.scss';
 import Load from './Load';
 //加载舞台类
 import Stage from './Stage';
-import Screen01 from './Screen01'
+import Screen01 from './Screen01';
+import Screen02 from './Screen02';
 import './resize.js';
 
 
