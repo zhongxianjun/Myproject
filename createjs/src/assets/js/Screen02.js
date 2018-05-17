@@ -19,14 +19,13 @@ Screen02.prototype._init = function(){
 
 	//城墙
 	this._showBlock();
+
 	//云朵
 	this._showCloud();
+
 	//月亮
 	this._showMoon();
-	//文字
-	this._showText();
-	//按钮
-	this._button();
+	
 	//小仙女
 	this._girl();
 
@@ -90,15 +89,34 @@ Screen02.prototype._showMoon = function(){
 }
 
 Screen02.prototype._showText = function(){
-	this.text01 = new createjs.Bitmap(this.queue.getResult('02_text01'));
-	this.text01.x = 280;
-	this.text01.y = 700;
+	return new Promise((resolve,reject)=>{
+		this.text01 = new createjs.Bitmap(this.queue.getResult('02_text01'));
+		this.text01.x = 230;
+		this.text01.y = 700;
+		this.text01.alpha = 0;
+		createjs.Tween.get(this.text01)
+		.wait(500)
+		.to({
+			x:270,
+			alpha:1
+		},2000,createjs.Ease.getPowIn(2.2));
 
-	this.text02 = new createjs.Bitmap(this.queue.getResult('02_text02'));
-	this.text02.x = 370;
-	this.text02.y = 720;
-
-	this.container.addChild(this.text01,this.text02);
+		this.text02 = new createjs.Bitmap(this.queue.getResult('02_text02'));
+		this.text02.x = 320;
+		this.text02.y = 720;
+		this.text02.alpha = 0;
+		createjs.Tween.get(this.text02)
+		.wait(2500)
+		.to({
+			x:370,
+			alpha:1
+		},2000,createjs.Ease.getPowIn(2.2))
+		.call(()=>{
+			resolve();
+		});
+		
+		this.container.addChild(this.text01,this.text02);
+	})
 }
 
 Screen02.prototype._button = function(){
@@ -118,7 +136,36 @@ Screen02.prototype._button = function(){
 		scaleY:1.5
 	},1500);
 
-	this.container.addChild(this.optipBtn,this.optipCircle);
+	//给按钮添加显示动画
+	this.btnContainer = new createjs.Container();
+	this.btnContainer.addChild(this.optipBtn,this.optipCircle);
+	this.btnContainer.alpha = 0;
+	createjs.Tween.get(this.btnContainer)
+	.to({
+		alpha:1
+	},500)
+
+	this.optipBtn.addEventListener('click',()=>{
+		//按钮消失
+		this.container.removeChild(this.btnContainer);
+
+		//文字消失动画
+		createjs.Tween.get(this.text01)
+		.to({
+			x:230,
+			alpha:0
+		},1500);
+
+		createjs.Tween.get(this.text02)
+		.to({
+			x:320,
+			alpha:0
+		},1500);
+
+		//屏幕抖动
+	})
+
+	this.container.addChild(this.btnContainer);
 }
 
 Screen02.prototype._girl = function(){
@@ -140,14 +187,28 @@ Screen02.prototype._girl = function(){
 	this.girlAnimation.x = 450;
 	this.girlAnimation.y = 942;
 
-	createjs.Tween.get(this.girlAnimation)
-	.wait(3500)
-	.to({
-		x:590
-	},5200)
-	.call(()=>{
-		this.girlAnimation.gotoAndPlay('stand');
-	});
+	new Promise((resolve,reject)=>{
+		createjs.Tween.get(this.girlAnimation)
+		.wait(3500)
+		.to({
+			x:590
+		},5200)
+		.call(()=>{
+			this.girlAnimation.gotoAndPlay('stand');
+			resolve();
+		});
+	})
+	.then(()=>{
+		//文字
+		return this._showText();
+	})
+	.then(()=>{
+		let timmer = setTimeout(()=>{
+			this._button();
+			clearTimeout(timmer);
+		},1000);
+		
+	})
 
 	this.container.addChild(this.girlAnimation);
 }
