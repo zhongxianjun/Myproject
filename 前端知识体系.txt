@@ -1,0 +1,81 @@
+﻿阶段一（Stage1）
+html
+css
+javascript基础
+移动端开发专题（相对单位使用、flex布局）
+pc端项目开发
+
+阶段二（Stage2）
+Scss预处理器 2                     
+响应式开发(媒体查询media query)1 
+js基础总结回顾 0.5
+js中级(内置对象与方法) 2
+String与Array对象方法专题 1.5
+事件、dom操作与定时器 4
+动画专题(css3与动画、定时器与动画、requestAnimationFrame与动画) 1
+cookie与本地存储 1
+正则表达式 2
+Bootstrap UI框架 3
+
+项目任务：响应式专题页面2个(个人简历)、特效交互案例 3个
+
+
+阶段三（Stage3）
+javascript高级(事件委托、事件冒泡与捕获、闭包、原型链)
+ES5方式自定义代码封装与模块式开发
+requirejs、commonjs了解(javaScript模块载入框架)
+ES6语法与模块化开发（import、export）
+ES6 promise专题
+webpack打包工具
+接口对接方式的前端开发模式(ajax、jsonp)
+js跨域专题（jsonp、cors跨域资源共享 主要在于后端支持）
+
+
+
+阶段四（Stage4）
+vue2.0基础
+vue2.0生命周期
+vue2.0（组件式开发、路由vue-router、vuex全局状态管理、axios[ajax库]、jsonp库）
+vue2.0动画
+vue2.0案例练手(增加部分插件使用、移动端UI框架结合使用)
+git、svn使用专题
+vue2.0完整项目开发(音乐webapp)
+项目上线完整流程
+
+
+选修内容
+相对单位在项目中的实际使用专题
+canvas(js原生操作与createjs库的操作) 
+audio与video多媒体
+h5小应用开发
+canvas图像处理相关
+svg矢量图操作
+
+
+css特殊布局 两栏、三栏...
+json数据格式
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CORS资料:
+http://www.ruanyifeng.com/blog/2016/04/cors.html
+
