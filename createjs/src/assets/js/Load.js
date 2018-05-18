@@ -41,7 +41,13 @@ Load.prototype._init = function(){
 		{id:'02_cloud01', src:'../images/cloud1_d65b6e1.png'},
 		{id:'02_cloud02', src:'../images/cloud2_71bf032.png'},
 		{id:'02_cloud03', src:'../images/cloud3_bc745db.png'},
-		{id:'02_cloud04', src:'../images/cloud4_2c8990f.png'}
+		{id:'02_cloud04', src:'../images/cloud4_2c8990f.png'},
+
+		//场景三的资源
+		{id:'03_text01', src:'../images/p2w1_5c2c750.png'},
+		{id:'03_text02', src:'../images/p2w2_95a96b0.png'},
+		{id:'03_light', src:'../images/light_4f354be.png'},
+		{id:'03_branch', src:'../images/bigtree_1f02526.png'}
 	]);
 
 	//资源加载进度

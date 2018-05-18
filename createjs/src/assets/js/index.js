@@ -6,6 +6,7 @@ import Load from './Load';
 import Stage from './Stage';
 import Screen01 from './Screen01';
 import Screen02 from './Screen02';
+import Screen03 from './Screen03';
 import './resize.js';
 
 
@@ -32,6 +33,13 @@ function handleTick(){
 				break;
 			}
 			var screen02 = new Screen02(stageObj.stage,queueObj.queue);
+
+		break;
+		case 3: //场景三
+			if(G.screenLocked == 3){
+				break;
+			}
+			var screen03 = new Screen03(stageObj.stage,queueObj.queue);
 
 		break;
 	}
