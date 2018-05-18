@@ -72,7 +72,7 @@ Screen02.prototype._showCloud = function(){
 	this.cloudContainer = new createjs.Container();
 	this.cloudContainer.addChild(this.cloud01,this.cloud02,this.cloud03,this.cloud04);
 	this.cloudContainer.x = 80;
-	this.cloudContainer.alpha = 0.8;
+	this.cloudContainer.alpha = 0.9;
 
 	createjs.Tween.get(this.cloudContainer)
 	.to({
@@ -174,7 +174,7 @@ Screen02.prototype._button = function(){
 				let count = 0;
 				var bgAnimation = new createjs.Tween.get(this.stage,{loop:true})
 				.to({
-					x:-15,
+					x:-10,
 					y:-610
 				},200,createjs.Ease.getPowIn(2.2))
 				.call(()=>{
@@ -203,16 +203,16 @@ Screen02.prototype._button = function(){
 			createjs.Tween.get(this.Block02)
 			.to({
 				y:1160,
-				rotation:-30,
+				rotation:10,
 				alpha:0
 			},2000);
 
 			createjs.Tween.get(this.Block03)
 			.to({
 				y:1550,
-				rotation:60,
+				rotation:-30,
 				alpha:0
-			},4000);
+			},3000);
 
 			//小仙女腾云驾雾
 			this.girlCloud = new createjs.Bitmap(this.queue.getResult('02_cloud01'));
@@ -227,7 +227,7 @@ Screen02.prototype._button = function(){
 			.to({
 				y:2316,
 				alpha:0
-			},10000)
+			},10000,createjs.Ease.getPowIn(1.2))
 			.call(()=>{
 				this.cloudContainer.removeChild(this.girlCloud);
 
@@ -239,7 +239,7 @@ Screen02.prototype._button = function(){
 			createjs.Tween.get(this.girlAnimation)
 			.to({
 				y:2250
-			},10000)
+			},10000,createjs.Ease.getPowIn(1.2))
 			.call(()=>{
 				createjs.Tween.get(this.girlAnimation)
 				.to({

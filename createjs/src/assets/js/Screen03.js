@@ -68,9 +68,27 @@ Screen03.prototype._button = function(){
 	this.btnContainer.addChild(this.optipBtn,this.optipCircle);
 	this.btnContainer.alpha = 0;
 	createjs.Tween.get(this.btnContainer)
+	.wait(5000)
 	.to({
 		alpha:1
 	},500);
 
 	this.container.addChild(this.btnContainer);
+
+	this.optipBtn.addEventListener('click',()=>{
+		//按钮消失
+		this.container.removeChild(this.btnContainer);
+
+			//文字消失动画
+			createjs.Tween.get(this.text01)
+			.to({
+				x:370,
+				alpha:0
+			},1500);
+
+			createjs.Tween.get(this.text02)
+			.to({
+				x:460,
+				alpha:0
+			},1500)
 }
