@@ -8,6 +8,7 @@ import Screen01 from './Screen01';
 import Screen02 from './Screen02';
 import Screen03 from './Screen03';
 import Screen04 from './Screen04';
+import Screen05 from './Screen05';
 import './resize.js';
 
 

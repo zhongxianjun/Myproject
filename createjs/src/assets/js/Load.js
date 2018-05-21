@@ -47,7 +47,20 @@ Load.prototype._init = function(){
 		{id:'03_text01', src:'../images/p2w1_5c2c750.png'},
 		{id:'03_text02', src:'../images/p2w2_95a96b0.png'},
 		{id:'03_light', src:'../images/light_4f354be.png'},
-		{id:'03_branch', src:'../images/bigtree_1f02526.png'}
+		{id:'03_branch', src:'../images/bigtree_1f02526.png'},
+
+		//场景四的资源
+		{id:'04_ground', src:'../images/ground_cc8e201.png'},
+		{id:'04_ground_bg', src:'../images/treePage_3a1da40.jpg'},
+		{id:'04_text01', src:'../images/p3w1_8d3187d.png'},
+		{id:'04_text02', src:'../images/p3w2_d1668d1.png'},
+
+		//场景五的资源
+		{id:'05_bg', src:'../images/flowerPage_a402a6d.jpg'},
+		{id:'05_girllights', src:'../images/girllights_2968f54.png'},
+		{id:'05_meteor', src:'../images/meteor_e9fdfcf.png'},
+		{id:'05_text01', src:'../images/p4w2_f821859.png'},
+		{id:'05_text02', src:'../images/p4w1_d9fb938.png'}
 	]);
 
 	//资源加载进度

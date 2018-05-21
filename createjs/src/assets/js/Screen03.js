@@ -17,6 +17,9 @@ Screen03.prototype._init = function(){
 	//文字
 	this._text();
 
+	//光
+	this._light();
+
 	this.stage.addChild(this.container);
 }
 
@@ -34,14 +37,14 @@ Screen03.prototype._text = function(){
 
 	this.text02 = new createjs.Bitmap(this.queue.getResult('03_text02'));
 	this.text02.alpha = 0;
-	this.text02.x = 460
+	this.text02.x = 460;
 	this.text02.y = 2050;
 	createjs.Tween.get(this.text02)
 	.wait(2500)
 	.to({
 		x: 430,
 		alpha: 1 
-	}, 2500)
+	}, 2500);
 
 	this.container.addChild(this.text01, this.text02);
 }
@@ -79,16 +82,58 @@ Screen03.prototype._button = function(){
 		//按钮消失
 		this.container.removeChild(this.btnContainer);
 
-			//文字消失动画
-			createjs.Tween.get(this.text01)
-			.to({
-				x:370,
-				alpha:0
-			},1500);
+		//文字消失动画
+		createjs.Tween.get(this.text01)
+		.to({
+			x:370,
+			alpha:0
+		},1500);
 
-			createjs.Tween.get(this.text02)
+		createjs.Tween.get(this.text02)
+		.to({
+			x:460,
+			alpha:0
+		},1500)
+		.call(()=>{
+			//移除光
+			createjs.Tween.get(this.light)
 			.to({
-				x:460,
 				alpha:0
-			},1500)
+			},3000)
+			.call(()=>{
+				this.container.removeChild(this.light);
+			});
+			
+			//树枝移动
+			this._branch();
+		});
+	});
+}
+
+Screen03.prototype._light = function(){
+	this.light = new createjs.Bitmap(this.queue.getResult('03_light'));
+	this.light.x = 140;
+	this.light.y = 1800;
+	this.light.alpha = 0;
+	createjs.Tween.get(this.light)
+	.to({
+		alpha: 1
+	}, 3000);
+	this.container.addChild(this.light);
+}
+
+Screen03.prototype._branch = function(){
+	this.branch = new createjs.Bitmap(this.queue.getResult('03_branch'));
+	this.branch.x = 1400;
+	this.branch.y = 1825;
+	createjs.Tween.get(this.branch)
+	.to({
+		x:-1400
+	},4000);
+
+	let timmer = setTimeout(()=>{
+		G.screen = 4;
+		clearTimeout(timmer);
+	},2000);
+	this.container.addChild(this.branch);
 }

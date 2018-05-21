@@ -197,7 +197,7 @@ Screen02.prototype._button = function(){
 			createjs.Tween.get(this.stage)
 			.to({
 				y:-1810
-			},7000);
+			},10000);
 
 			//墙体掉落
 			createjs.Tween.get(this.Block02)
@@ -216,21 +216,19 @@ Screen02.prototype._button = function(){
 
 			//小仙女腾云驾雾
 			this.girlCloud = new createjs.Bitmap(this.queue.getResult('02_cloud01'));
-			this.girlCloud.x = 630;
-			this.girlCloud.y = 1016;
-			this.girlCloud.scaleX = .2;
-			this.girlCloud.scaleY = .2;
+			this.girlCloud.x = 600;
+			this.girlCloud.y = 1006;
+			this.girlCloud.scaleX = .3;
+			this.girlCloud.scaleY = .3;
 			this.girlCloud.alpha = .8;
 			this.cloudContainer.addChild(this.girlCloud);
 			//云朵动画
 			createjs.Tween.get(this.girlCloud)
 			.to({
-				y:2316,
-				alpha:0
+				y:2286,
+				alpha:.2
 			},10000,createjs.Ease.getPowIn(1.2))
 			.call(()=>{
-				this.cloudContainer.removeChild(this.girlCloud);
-
 				//将场景设置为三
 				G.screen = 3;
 			});
@@ -238,12 +236,21 @@ Screen02.prototype._button = function(){
 			//小仙女下落动画
 			createjs.Tween.get(this.girlAnimation)
 			.to({
-				y:2250
+				y:2230
 			},10000,createjs.Ease.getPowIn(1.2))
 			.call(()=>{
+				createjs.Tween.get(this.girlCloud)
+				.to({
+					y:2296,
+					alpha:0
+				},200)
+				.call(()=>{
+					this.cloudContainer.removeChild(this.girlCloud);
+				});
+
 				createjs.Tween.get(this.girlAnimation)
 				.to({
-					y:2270
+					y:2250
 				},4000)
 			})
 		});
@@ -271,6 +278,7 @@ Screen02.prototype._girl = function(){
 	this.girlAnimation = new createjs.Sprite(G.girlSprite,'walk');
 	this.girlAnimation.x = 450;
 	this.girlAnimation.y = 942;
+	G.girlAnimation = this.girlAnimation;
 
 	new Promise((resolve,reject)=>{
 		createjs.Tween.get(this.girlAnimation)
