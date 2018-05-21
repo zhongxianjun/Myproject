@@ -1,5 +1,6 @@
 import G from './gloable';
 import '../scss/index.scss';
+import './resize.js';
 //加载Load资源处理类
 import Load from './Load';
 //加载舞台类
@@ -9,7 +10,6 @@ import Screen02 from './Screen02';
 import Screen03 from './Screen03';
 import Screen04 from './Screen04';
 import Screen05 from './Screen05';
-import './resize.js';
 
 
 var stageObj = new Stage();
@@ -49,6 +49,13 @@ function handleTick(){
 				break;
 			}
 			var screen04 = new Screen04(stageObj.stage,queueObj.queue);
+
+		break;
+		case 5: //场景五
+			if(G.screenLocked == 5){
+				break;
+			}
+			var screen05 = new Screen05(stageObj.stage,queueObj.queue);
 
 		break;
 	}

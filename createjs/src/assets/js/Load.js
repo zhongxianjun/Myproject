@@ -80,5 +80,41 @@ Load.prototype._init = function(){
 		//隐藏加载
 		loadDom.style.display = 'none';
 		createjs.Sound.play('musicBg');
+
+		let ctrl = document.createElement('div');
+		ctrl.style.position = 'fixed';
+		ctrl.style.right = '20px';
+		ctrl.style.top = '20px';
+		ctrl.style.zIndex = 1000;
+		ctrl.className = 'audio';
+		ctrl.setAttribute('playState', 'true');
+
+		let ctrlBtn = document.createElement('span');
+		ctrlBtn.style.display = 'block';
+		ctrlBtn.style.width = '30px';
+		ctrlBtn.style.height = '30px';
+		ctrlBtn.style.background = 'url(../images/music-on_d8d8e5f.png) no-repeat';
+		ctrlBtn.style.backgroundSize = '100% 100%';
+		ctrlBtn.style.backgroundPosition = 'center center';
+		ctrl.appendChild(ctrlBtn);
+
+		ctrl.addEventListener('click', ()=>{
+			let state = ctrl.getAttribute('playState');
+			if(state == 'true'){
+				createjs.Sound.stop('musicBg');
+				ctrl.setAttribute('playState', 'false');
+				ctrlBtn.style.background = 'url(../images/music-off_8ae1c44.png) no-repeat';
+				ctrlBtn.style.backgroundSize = '100% 100%';
+				ctrlBtn.style.backgroundPosition = 'center center';
+			}else{
+				createjs.Sound.play('musicBg');
+				ctrl.setAttribute('playState', 'true');
+				ctrlBtn.style.background = 'url(../images/music-on_d8d8e5f.png) no-repeat';
+				ctrlBtn.style.backgroundSize = '100% 100%';
+				ctrlBtn.style.backgroundPosition = 'center center';
+			}
+		});
+
+		document.body.appendChild(ctrl);
 	}
 }

@@ -197,7 +197,7 @@ Screen02.prototype._button = function(){
 			createjs.Tween.get(this.stage)
 			.to({
 				y:-1810
-			},10000);
+			},7000);
 
 			//墙体掉落
 			createjs.Tween.get(this.Block02)
@@ -227,7 +227,7 @@ Screen02.prototype._button = function(){
 			.to({
 				y:2286,
 				alpha:.2
-			},10000,createjs.Ease.getPowIn(1.2))
+			},7000,createjs.Ease.getPowIn(1.2))
 			.call(()=>{
 				//将场景设置为三
 				G.screen = 3;
@@ -237,7 +237,7 @@ Screen02.prototype._button = function(){
 			createjs.Tween.get(this.girlAnimation)
 			.to({
 				y:2230
-			},10000,createjs.Ease.getPowIn(1.2))
+			},7000,createjs.Ease.getPowIn(1.2))
 			.call(()=>{
 				createjs.Tween.get(this.girlCloud)
 				.to({

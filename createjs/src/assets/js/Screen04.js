@@ -158,6 +158,6 @@ Screen04.prototype._button = function(){
 		.to({
 			x:400,
 			alpha:0
-		},1500)
+		},1500);
 	})
 }
