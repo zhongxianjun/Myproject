@@ -1,0 +1,307 @@
+﻿模块化开发专题讲解
+
+
+（一）模块化的写法
+
+随着网站逐渐变成“互联网应用程序”，嵌入网页的js代码越来越庞大，网页越来越像桌面程序，需要团队协作开发。模块化编程变得迫切需要，理想情况下，我们只需要实现核心的业务逻辑，其他加载别人的模块就行了。
+但是js不是一种模块化编程语言，它不支持类，更别说模块了。不过，ES6的投入使用，解决了这一难题。
+
+
+一、最初的写法
+
+	function m1(){
+	  //....
+	}
+
+	function m1(){
+	  //....
+	}
+
+这两个函数就组成了一个模块，要用时，直接调用就行了。但是缺点也很明显，它们“污染了全局变量”，容易与其它模块间发生变量名冲突，而且看不出模块内成员的直接关系。
+
+
+二、对象写法
+
+为了解决上面的缺点，可以把模块写成一个对象。
+
+	var module1 = new Object({
+	   _count : 0,
+
+	   m1 : function(){
+	      //...	
+	   },
+	   
+	   m2 : function(){
+	      //...	
+	   }
+	
+	});
+	
+上面的函数m1()和函数m2(),都封装在module1对象里，使用是调用这个对象属性。
+	
+	module1.m1();
+
+但是这样的写法会暴露所有的模块成员，内部状态可以被外部改写。比如：
+
+	module1._count = 5;
+
+
+三、立即执行函数写法
+
+使用“立即执行函数”（Immediately-Invoked Function Expression，IIFE），可以达到不暴露私有成员的目的。
+
+	var module1 = (function(){
+
+	   var _count = 0;
+
+	   var m1 = function(){
+		//...
+	   };
+
+	   var m2 = function(){
+		//...
+	   };
+
+	   return {
+		m1 : m1,
+		m2 : m2,
+	   }
+	}());
+
+使用IIFE的写法，外部代码无法读取内部的_count变量。
+
+	console.log(module1._count);	//undefined
+
+
+四、放大模式
+
+如果模块很大，需要分成几个部分，或者需要继承另一个模块，这个时候就有必要采取“放大模式”
+
+	var module1 = (function(mod){
+	
+ 	   mod.m3 = function(){
+		//...
+	   };
+
+	   return mod;
+
+	}(module1));
+
+上面代码为module1 模块新添加了一个方法m3(),然后返回新的module1 模块。
+
+
+五、输入全局变量
+
+独立性是模块的重要特点，模块内部最好不与程序的其它部分直接交互。为了在模块内部调用全局变量，可以将其通过参数的形式传入模块。
+
+	var module1 = (function ($, YAHOO){
+
+	   //...
+
+	})(jQuery,YAHOO);
+
+
+
+
+（二）AMD规范
+
+一、模块的规范
+
+有了模块，我们更方便使用别人的代码，但是如果大家乱写乱用，岂不是乱了套。考虑到js模块现在还没有官方规范，模块规范就很重要了。
+目前通用的就两种js模块规范：CommonJS和AMD。
+
+
+二、CommonJS
+
+2009年，node.js项目诞生，将js语言用于服务端编程，这标志“JavaScript模块化编程”正式诞生。node.js的模块系统，就是参照CommonJS规范实现的。
+在CommonJS中，有一个全局性方法require()，用于加载模块。假定有一个数学模块math.js，就可以像下面这样加载。
+
+	var math = require("math");
+
+然后，就可以调用模块提供的方法：
+	
+	var math = require("math")
+
+	math.add(2,3);	//5
+
+这就是require()加载模块的方法。
+
+
+三、浏览器环境
+
+有了服务器模块，大家就想有客户端模块，最好还是两个能兼容，一个模块不用改，大家都可以用。
+
+但是，由于一个重大的局限，使得CommonJS规范不适用于浏览器环境。还是上一节的代码，如果在浏览器中运行，会有一个很大的问题，你能看出来吗？
+
+　　var math = require("math");
+
+　　math.add(2, 3);
+
+第二行math.add(2, 3)，在第一行require("math")之后运行，因此必须等math.js加载完成。也就是说，如果加载时间很长，整个应用就会停在那里等。
+
+这对服务器端不是一个问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间。但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于"假死"状态。
+
+因此，浏览器端的模块，不能采用"同步加载"（synchronous），只能采用"异步加载"（asynchronous）。这就是AMD规范诞生的背景。
+
+
+四、AMD
+
+AMD是"Asynchronous Module Definition"的缩写，意思就是"异步模块定义"。
+它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行。
+
+AMD也采用require()语句加载模块，但是不同于CommonJS，它要求两个参数：
+
+　　require([module], callback);
+
+第一个参数[module]，是一个数组，里面的成员就是要加载的模块；第二个参数callback，则是加载成功之后的回调函数。如果将前面的代码改写成AMD形式，就是下面这样：
+
+　　require(['math'], function (math) {
+
+　　　　math.add(2, 3);
+
+　　});
+
+math.add()与math模块加载不是同步的，浏览器不会发生假死。所以很显然，AMD比较适合浏览器环境。
+
+
+
+（三）require.js的用法
+
+一、用require.js的意义
+
+最早的时候，所有Javascript代码都写在一个文件里面，只要加载这一个文件就够了。后来，代码越来越多，一个文件不够了，必须分成多个文件，依次加载。下面的网页代码，相信很多人都见过。
+    
+    <script src="1.js"></script>
+　　<script src="2.js"></script>
+　　<script src="3.js"></script>
+　　<script src="4.js"></script>
+　　<script src="5.js"></script>
+　　<script src="6.js"></script>
+
+这段代码依次加载多个js文件。
+
+这样的写法有很大的缺点。1、加载的时候，浏览器会停止网页渲染，加载文件越多，网页失去响应的时间就会越长；2、由于js文件之间存在依赖关系，因此必须严格保证加载顺序（比如上例的1.js要在2.js的前面），依赖性最大的模块一定要放到最后加载，当依赖关系很复杂的时候，代码的编写和维护都会变得困难。
+
+require.js的诞生，就是为了解决这两个问题：　
+
+　　（1）实现js文件的异步加载，避免网页失去响应；
+
+　　（2）管理模块之间的依赖性，便于代码的编写和维护。
+
+
+二、require.js的加载
+
+下载后，假定把它放在js子目录下面，就可以加载了。
+
+	<script src="js/require.js"></script>
+
+有人可能会想到，加载这个文件，也可能造成网页失去响应。解决办法有两个，一个是把它放在网页底部加载，另一个是写成下面这样：
+
+　　<script src="js/require.js" defer async="true" ></script>
+
+因为IE不支持async，只支持defer，所以把defer 也写上。
+
+
+三、主模块写法
+
+假定主模块依赖jquery、underscore和backbone这三个模块，main.js就可以这样写：
+
+	require(['jquery', 'underscore', 'backbone'], function ($, _, Backbone){
+
+　　　　	// some code here
+
+　　	});
+
+require.js会先加载jQuery、underscore和backbone，然后再运行回调函数。主模块的代码就写在回调函数中。
+
+
+四、模块的加载
+
+主模块的依赖模块是['jquery', 'underscore', 'backbone']。默认情况下，require.js假定这三个模块与main.js在同一个目录，文件名分别为jquery.js，underscore.js和backbone.js，然后自动加载。
+
+使用require.config()方法，我们可以对模块的加载行为进行自定义。require.config()就写在主模块（main.js）的头部。参数就是一个对象，这个对象的paths属性指定各个模块的加载路径。
+
+如果这些模块在其他目录，比如js/lib目录，则有两种写法：
+
+1、逐一指定路径
+　　require.config({
+
+　　　　paths: {
+
+　　　　　　"jquery": "lib/jquery.min",
+　　　　　　"underscore": "lib/underscore.min",
+　　　　　　"backbone": "lib/backbone.min"
+
+　　　　}
+
+　　});
+
+2、直接改变基目录（baseUrl）。
+
+　　require.config({
+
+　　　　baseUrl: "js/lib",
+
+　　　　paths: {
+
+　　　　　　"jquery": "jquery.min",
+　　　　　　"underscore": "underscore.min",
+　　　　　　"backbone": "backbone.min"
+
+　　　　}
+
+　　});
+
+
+五、AMD模块的写法
+
+假定现在有一个math.js文件，它定义了一个math模块。那么，math.js就要这样写：
+
+　　// math.js
+
+　　define(function (){
+
+　　　　var add = function (x,y){
+
+　　　　　　return x+y;
+
+　　　　};
+
+　　　　return {
+
+　　　　　　add: add
+　　　　};
+
+　　});
+
+加载方法如下：
+
+　　// main.js
+
+　　require(['math'], function (math){
+
+　　　　alert(math.add(1,1));
+
+　　});
+
+如果这个模块还依赖其他模块，那么define()函数的第一个参数，必须是一个数组，指明该模块的依赖性。
+
+　　define(['myLib'], function(myLib){
+
+　　　　function foo(){
+
+　　　　　　myLib.doSomething();
+
+　　　　}
+
+　　　　return {
+
+　　　　　　foo : foo
+
+　　　　};
+
+　　});
+
+当require()函数加载上面这个模块的时候，就会先加载myLib.js文件。
+
+
