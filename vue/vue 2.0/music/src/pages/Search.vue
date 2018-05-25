@@ -39,6 +39,12 @@
       </div>
     </div>
     <!-- E  搜索 -->
+
+    <!--  S 弹出层  -->
+    <div class="tipsFadeAway">
+        未搜索到该歌手信息
+    </div>
+    <!--  E 弹出层  -->
   </div>
 </template>
 
@@ -122,7 +128,8 @@ export default {
     	if(song.zhida.type == 2){
 			this.$router.push({path:'/singer/'+song.zhida.singermid});
     	}else{
-    		alert('未搜索到该歌手信息');
+        //为搜索到歌手信息，弹出层渐渐消失
+    		this._tipsFadeAway();
     	}
     	
     },
@@ -149,6 +156,17 @@ export default {
         this.setSongListArr(song);
       }
       
+    },
+    _tipsFadeAway(){  //弹出层渐渐消失效果
+      let tip = document.querySelector('.tipsFadeAway');
+      tip.style.transition = '';
+      tip.style.opacity = '1';
+
+      let timmer = setTimeout(function(){
+        tip.style.transition = 'all 2s linear'; 
+        tip.style.opacity = '0';
+        clearTimeout(timmer);
+      },1000);
     },
 
     ...mapMutations({
@@ -270,6 +288,21 @@ li{
       margin-right: 5px;
     }
   }
+}
+
+.tipsFadeAway{
+  text-align: center;
+  font-size: 14px;
+  color:rgba(255,255,255,.8);
+  background: rgba(255,255,255,.2);
+  width:160px;
+  line-height: 36px;
+  position: fixed;
+  left:50%;
+  top: 33%;
+  margin-left: -80px;
+  border-radius: 20px;
+  opacity: 0;
 }
 
 </style>

@@ -19,7 +19,7 @@
 									<span class="song-name" v-text="item.musicData.songname"></span>
 									<span class="song-operator" @click.stop>
 										<i class="icon-op icon-favorate"></i> 
-										<i class="icon-op icon-delete" @click="deleteSong"></i>
+										<i class="icon-op icon-delete" @click="deleteSong(item)"></i>
 									</span>
 								</li>
 							</router-link>
@@ -65,8 +65,8 @@ export default {
   		this.setCurIndex(k);
   	},
 
-  	deleteSong(){ //删除列表中的歌曲
-  		console.log('删除');
+  	deleteSong(song){ //删除列表中的歌曲
+  		this.getSongListArr.splice(song,1);
   	},
 
   	...mapMutations({
