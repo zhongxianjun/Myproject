@@ -14,7 +14,7 @@
 
    	<div class="song-operator" @click.stop>
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
-      <a href="javascript:void(0);" class="next"></a>
+      <a href="javascript:void(0);" class="next" @click="next"></a>
       <a href="javascript:void(0);" class="song-list" @click="openSongList"></a>
    	</div>
     <SongList :switchState="switchState" @closeState="closeState"></SongList>
@@ -32,13 +32,22 @@
 import SongList from '@/components/SongList';
 import PlayMusic from '@/pages/PlayMusic';
 
+//引入jsonp
+import jsonp from 'jsonp';
+
+//引入api接口地址文件
+import api from '../api/songApi';
+
 import {mapGetters,mapMutations} from 'vuex';
 
 export default {
   name: '',
   data(){
     return {
-      switchState:false
+      switchState:false,
+      smid:'',
+      mid:'',
+      src:''
     }
   },
   computed:{
@@ -46,7 +55,9 @@ export default {
     	'getPlaySrc',
     	'getCurSong',
     	'getPalyState',
-      'getMiniState'
+      'getMiniState',
+      'getSongListArr',
+      'getCurIndex'
     ])
   },
   watch:{
@@ -55,11 +66,33 @@ export default {
   	}
   },
   methods:{
+    _getMusicAdress(s,m){ //歌曲播放地址
+      this.smid = s;
+      this.mid = m;
+
+      //1、获取 vkey
+      let url = api.vKeyApi + `&songmid=${this.smid}&filename=C400${this.smid}.m4a`;
+
+      jsonp(url,{param:'callback'},(err,data)=>{
+        // console.log(data);
+        let vkey = data.data.items[0].vkey;
+        
+        //2、使用 smid和vKey取得歌曲播放地址
+        this.src = `http://dl.stream.qqmusic.qq.com/C400${this.smid}.m4a?vkey=${vkey}&guid=7120953682&uin=0&fromtag=66`;
+
+        //获取当前播放地址
+        this.setSrc(this.src);
+        // console.log(this.src);
+      });
+
+      this.setMiniState(true);
+    },
+
   	_playPauseplay(){ //控制图标播放与暂停
-      
       //控制按钮
       this.palyState(!this.getPalyState);
     },
+
     _playOrPause(){ //控制audio播放与暂停
       let thumbPlaying = document.querySelector(".thumb.playing");
       let player = document.querySelector("#player");
@@ -86,9 +119,35 @@ export default {
       this.switchState = true;
     },
 
+    next(){ //播放下一曲
+      //重置播放状态
+      this.palyState(false);
+      let thumbPlaying = document.querySelector(".thumb.playing");
+      thumbPlaying.style.animationPlayState = 'running';
+
+      //更换 播放地址 歌曲信息
+      let num = 0;
+      num = this.getCurIndex;
+      if(num == this.getSongListArr.length-1){
+        num = 0;
+      }else{
+        num++;
+      }
+      this.setCurIndex(num);
+      this.getSongListArr.forEach((item,i)=>{
+        if(num == i){
+          this.setCurSong(item);
+          this._getMusicAdress(item.musicData.songmid,item.musicData.albummid);
+        }
+      });
+    },
+
     ...mapMutations({
         'setSrc':'setPlaySrc',
-        'palyState':'setPalyState'
+        'palyState':'setPalyState',
+        'setCurIndex':'setCurIndex',
+        'setCurSong':'setCurSong',
+        'setMiniState':'setMiniState'
     })
   },
   components:{

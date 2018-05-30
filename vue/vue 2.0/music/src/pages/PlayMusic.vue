@@ -230,7 +230,7 @@ export default {
     display:flex;
     position: fixed;
     z-index: 999;
-    bottom: 50px;
+    top: 88vh;
     width: 100%;
     justify-content:space-around;
     a{

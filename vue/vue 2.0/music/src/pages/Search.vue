@@ -117,9 +117,9 @@ export default {
         // console.log(this.searchMusicList);
         
         if(this.keywords == ''){
-			this.showState = false;
+			     this.showState = false;
         }else{
-			this.showState = true;
+			     this.showState = true;
         }
       });
     },
