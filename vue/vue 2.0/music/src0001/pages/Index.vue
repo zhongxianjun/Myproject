@@ -132,6 +132,7 @@ export default {
 	  				autoplay: {
 	  					delay:3000,
 	  				},
+	  				effect : 'cube',
 	  				pagination:{
 	  					el:'.swiper-pagination',
 	  					type:'bullets',

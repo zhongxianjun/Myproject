@@ -35,31 +35,18 @@
 </template>
 
 <script>
-//引入jsonp
-import jsonp from 'jsonp';
-
-//引入api接口地址文件
-import api from '../api/songApi';
-
-//引入better-scroll
-import BScroll from 'better-scroll';
-
 import {mapGetters,mapMutations} from 'vuex';
 export default {
   name: '',
   data(){
     return {
-    	smid:'',
-    	mid:'',
-    	src:'',
-    	myScroll:null
+    	
     }
   },
   computed:{
   	...mapGetters([
   		'getCurIndex',
-  		'getSongListArr',
-  		'getPlaySrc'
+  		'getSongListArr'
   	])
   },
   props:{
@@ -68,31 +55,7 @@ export default {
   		default:true
   	}
   },
-  mounted(){
-  	this.myScroll = new BScroll('.song-wrapper',{
-  		scrollY: true,
-    	click: true
-	});
-  },
   methods:{
-  	_getMusicAdress(s,m){ //歌曲播放地址
-      this.smid = s;
-      this.mid = m;
-
-      //1、获取 vkey
-      let url = api.vKeyApi + `&songmid=${this.smid}&filename=C400${this.smid}.m4a`;
-
-      jsonp(url,{param:'callback'},(err,data)=>{
-        // console.log(data);
-        let vkey = data.data.items[0].vkey;
-        
-        //2、使用 smid和vKey取得歌曲播放地址
-        this.src = `http://dl.stream.qqmusic.qq.com/C400${this.smid}.m4a?vkey=${vkey}&guid=7120953682&uin=0&fromtag=66`;
-
-        //获取当前播放地址
-        this.setPlaySrc(this.src);
-      });
-    },
   	close(){ //关闭列表
   		this.$emit('closeState',false);
   	},
@@ -103,37 +66,20 @@ export default {
   	},
 
   	deleteSong(song,i){ //删除列表中的歌曲
-  		let len = this.getSongListArr.length - 1;
-  		if(i == 0 && this.getCurIndex == 0){
-  			alert("已经是最后一首歌了");
-  			return;
+  		this.getSongListArr.splice(i,1);
+  		if(i == this.getSongListArr.length){
+  			i = 0;
+  			this.setCurIndex(i);
+	  		this.setCurSong(this.getSongListArr[i]);
   		}else{
-  			this.getSongListArr.splice(i,1);
+	  		this.setCurIndex(i);
+	  		this.setCurSong(this.getSongListArr[i]);
   		}
-
-  		if(i == this.getCurIndex){
-  			if(i == len){
-  				i = 0;
-  				this._getMusicAdress(this.getSongListArr[i].musicData.songmid,this.getSongListArr[i].musicData.albummid);
-  			}else{
-  				this._getMusicAdress(this.getSongListArr[i].musicData.songmid,this.getSongListArr[i].musicData.albummid);
-  			}
-  		}else{
-  			if(i < this.getCurIndex){
-  				i = this.getCurIndex - 1;
-  			}else{
-  				i = this.getCurIndex;
-  			}
-  		}
-  		
-		this.setCurIndex(i);
-  		this.setCurSong(this.getSongListArr[i]);
   	},
 
   	...mapMutations({
   		'setCurIndex':'setCurIndex',
-  		'setCurSong':'setCurSong',
-  		'setPlaySrc':'setPlaySrc'
+  		'setCurSong':'setCurSong'
   	})
 
   }
