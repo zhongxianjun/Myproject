@@ -28,7 +28,7 @@
 						<ul>
 							<li v-for="(elem,k) in topList" :key="elem.data.songid" @click="playAddMusic(elem)">
 								<div class="thumb">
-									<img :src="'https://y.gtimg.cn/music/photo_new/T002R90x90M000'+ elem.data.albummid +'.jpg?max_age=2592000'">
+									<img v-lazy="'https://y.gtimg.cn/music/photo_new/T002R90x90M000'+ elem.data.albummid +'.jpg?max_age=2592000'">
 								</div>
 								<div class="text-info">
 									<h3>{{elem.data.songname}}</h3>

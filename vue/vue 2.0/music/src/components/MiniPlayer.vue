@@ -2,7 +2,7 @@
   <div class="mini-player" @click="toPlayMusic" v-if="getMiniState">
    	<!-- S 歌曲封面 -->
    	<div class="thumb playing">
-   		<img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+ getCurSong.musicData.albummid +'.jpg'">
+   		<img v-lazy="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+ getCurSong.musicData.albummid +'.jpg'">
    	</div>
    	<!-- E 歌曲封面 -->
 
