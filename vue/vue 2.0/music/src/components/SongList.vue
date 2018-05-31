@@ -68,10 +68,12 @@ export default {
   	}
   },
   mounted(){
-  	this.myScroll = new BScroll('.song-wrapper',{
-  		scrollY: true,
-    	click: true
-	});
+  	this.$nextTick(()=>{
+  		this.myScroll = new BScroll('.song-wrapper',{
+	  		scrollY: true,
+	    	click: true
+		});
+  	});
   },
   methods:{
   	_getMusicAdress(s,m){ //歌曲播放地址
