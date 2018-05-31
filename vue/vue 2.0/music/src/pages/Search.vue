@@ -41,7 +41,7 @@
     <!-- E  搜索 -->
 
     <!--  S 弹出层  -->
-    <div class="tipsFadeAway">
+    <div class="tipsFadeAway" v-show="tipState">
         未搜索到该歌手信息
     </div>
     <!--  E 弹出层  -->
@@ -71,7 +71,8 @@ export default {
       keywords:'',
       searchMusicList:{},
       scroll:'',
-      showState:false
+      showState:false,
+      tipState:false
   	}
   },
   computed:{
@@ -158,15 +159,27 @@ export default {
       
     },
     _tipsFadeAway(){  //弹出层渐渐消失效果
-      let tip = document.querySelector('.tipsFadeAway');
-      tip.style.transition = '';
-      tip.style.opacity = '1';
+      new Promise((resolve,reject)=>{
+        this.tipState = true;
+        let tip = document.querySelector('.tipsFadeAway');
+        tip.style.transition = '';
+        tip.style.opacity = '1';
 
-      let timmer = setTimeout(function(){
-        tip.style.transition = 'all 2s linear'; 
-        tip.style.opacity = '0';
-        clearTimeout(timmer);
-      },1000);
+        let timmer = setTimeout(function(){
+          tip.style.transition = 'all 2s linear'; 
+          tip.style.opacity = '0';
+          setTimeout(()=>{
+            resolve();
+          },2000);
+          clearTimeout(timmer);
+        },1000);
+      })
+      .then(()=>{
+        this.tipState = false;
+      });
+      
+
+        
     },
 
     ...mapMutations({

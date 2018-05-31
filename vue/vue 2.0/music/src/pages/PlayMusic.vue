@@ -10,7 +10,7 @@
 
       <!-- S  图片动画 -->
       <div class="thumb-playing">
-        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+getCurSong.musicData.albummid+'.jpg?max_age=2592000'">
+        <img v-lazy="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+getCurSong.musicData.albummid+'.jpg?max_age=2592000'">
       </div>
       <!-- E  图片动画 -->
 
@@ -26,7 +26,7 @@
 
       <!-- S  大背景图片 -->
       <div class="bg-album">
-        <img :src="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+getCurSong.musicData.albummid+'.jpg?max_age=2592000'">
+        <img v-lazy="'https://y.gtimg.cn/music/photo_new/T002R300x300M000'+getCurSong.musicData.albummid+'.jpg?max_age=2592000'">
       </div>
       <!-- E  大背景图片 -->
 

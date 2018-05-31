@@ -4,8 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import VueLazyload from 'vue-lazyload'
+import Loading from './assets/icon/music.png'
 
 Vue.config.productionTip = false
+Vue.use(VueLazyload,{
+	loading : Loading
+})
 
 /* eslint-disable no-new */
 new Vue({
