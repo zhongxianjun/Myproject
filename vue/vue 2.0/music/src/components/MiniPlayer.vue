@@ -47,7 +47,8 @@ export default {
       switchState:false,
       smid:'',
       mid:'',
-      src:''
+      src:'',
+      endSwitch:false
     }
   },
   computed:{
@@ -61,9 +62,12 @@ export default {
     ])
   },
   watch:{
-  	getPalyState(){
+  	getPalyState(){ //监听播放状态
 		  this._playOrPause();
-  	}
+  	},
+    endSwitch(){
+      this.next();
+    }
   },
   methods:{
     _getMusicAdress(s,m){ //歌曲播放地址
@@ -140,6 +144,11 @@ export default {
           this._getMusicAdress(item.musicData.songmid,item.musicData.albummid);
         }
       });
+    },
+
+    _musicEnd(){
+      let playbackProgress = document.getElementById('player');
+      this.endSwitch = playbackProgress.ended;
     },
 
     ...mapMutations({
