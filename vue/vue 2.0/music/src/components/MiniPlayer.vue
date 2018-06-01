@@ -16,7 +16,6 @@
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
       <a href="javascript:void(0);" class="next" @click="next"></a>
       <a href="javascript:void(0);" class="song-list" @click="openSongList"></a>
-      <button type="button" @click="_musicEnd">按钮</button>
    	</div>
     <SongList :switchState="switchState" @closeState="closeState"></SongList>
    	<!-- E 歌曲信息 -->
@@ -48,8 +47,7 @@ export default {
       switchState:false,
       smid:'',
       mid:'',
-      src:'',
-      endSwitch:false
+      src:''
     }
   },
   computed:{
@@ -65,10 +63,11 @@ export default {
   watch:{
   	getPalyState(){ //监听播放状态
 		  this._playOrPause();
-  	},
-    endSwitch(){
-      
-    }
+  	}
+  },
+  mounted(){
+    //调用第一次 检测音乐播放是否完毕
+    this._musicEnd();
   },
   methods:{
     _getMusicAdress(s,m){ //歌曲播放地址
@@ -147,14 +146,15 @@ export default {
       });
     },
 
-    _musicEnd(){
+    _musicEnd(){  //播放完毕切换下一曲
       let playbackProgress = document.getElementById('player');
-      this.endSwitch = false;
       if(playbackProgress.ended){
         this.next();
-        this.endSwitch = playbackProgress.ended;
-        console.log("播放完毕");
       };
+
+      setTimeout(()=>{ 
+        this._musicEnd();
+      },1000)
     },
 
     ...mapMutations({

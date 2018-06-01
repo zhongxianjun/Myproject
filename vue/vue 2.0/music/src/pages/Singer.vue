@@ -12,7 +12,7 @@
 				<ul>
 					<router-link :to="'/singer/'+singer.Fsinger_mid" tag="div" v-for="(singer,i) in s.singer" :key="i">
 						<li>
-							<img :src="'https://y.gtimg.cn/music/photo_new/T001R150x150M000'+ singer.Fsinger_mid +'.jpg?max_age=2592000'">
+							<img v-lazy="'https://y.gtimg.cn/music/photo_new/T001R150x150M000'+ singer.Fsinger_mid +'.jpg?max_age=2592000'">
 							<span>{{singer.Fsinger_name}}</span>
 						</li>
 					</router-link>
