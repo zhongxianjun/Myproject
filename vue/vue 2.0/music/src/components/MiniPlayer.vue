@@ -47,7 +47,8 @@ export default {
       switchState:false,
       smid:'',
       mid:'',
-      src:''
+      src:'',
+      playbackProgress:null
     }
   },
   computed:{
@@ -67,7 +68,9 @@ export default {
   },
   mounted(){
     //调用第一次 检测音乐播放是否完毕
-    this._musicEnd();
+    this.$nextTick(()=>{
+      this._musicEnd();
+    });
   },
   methods:{
     _getMusicAdress(s,m){ //歌曲播放地址
@@ -147,14 +150,15 @@ export default {
     },
 
     _musicEnd(){  //播放完毕切换下一曲
-      let playbackProgress = document.getElementById('player');
-      if(playbackProgress.ended){
-        this.next();
-      };
-
+      this.playbackProgress = document.getElementById('player');
+      if(this.getMiniState){
+        if(this.playbackProgress.ended){
+          this.next();
+        };
+      }
       setTimeout(()=>{ 
-        this._musicEnd();
-      },1000)
+          this._musicEnd();
+        },1000);
     },
 
     ...mapMutations({
