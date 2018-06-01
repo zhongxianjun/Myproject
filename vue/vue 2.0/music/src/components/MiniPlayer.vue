@@ -16,6 +16,7 @@
    		<a href="javascript:void(0);" class="playPauseplay" :class="{pausePlay:getPalyState}" @click="_playPauseplay"></a>
       <a href="javascript:void(0);" class="next" @click="next"></a>
       <a href="javascript:void(0);" class="song-list" @click="openSongList"></a>
+      <button type="button" @click="_musicEnd">按钮</button>
    	</div>
     <SongList :switchState="switchState" @closeState="closeState"></SongList>
    	<!-- E 歌曲信息 -->
@@ -66,7 +67,7 @@ export default {
 		  this._playOrPause();
   	},
     endSwitch(){
-      this.next();
+      
     }
   },
   methods:{
@@ -148,7 +149,12 @@ export default {
 
     _musicEnd(){
       let playbackProgress = document.getElementById('player');
-      this.endSwitch = playbackProgress.ended;
+      this.endSwitch = false;
+      if(playbackProgress.ended){
+        this.next();
+        this.endSwitch = playbackProgress.ended;
+        console.log("播放完毕");
+      };
     },
 
     ...mapMutations({
