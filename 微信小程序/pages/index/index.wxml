@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- S 头部 -->
+  <view class="header">
+    <form>
+      <input></input>
+    </form>
+  </view>
+  <!-- E 头部 -->
+
+  <view class="movie">
+    <view class="tab">
+      <text class='active'>正在热映</text>
+      <text>即将上映</text>
+      <text>热播TOP250</text>
+    </view>
+    <view class="contant"></view>
+  </view>
+</view>

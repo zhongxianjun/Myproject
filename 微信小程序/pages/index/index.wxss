@@ -1,0 +1,44 @@
+/**index.wxss**/
+.container .header{
+  background: #1AAD16;
+  padding: 50rpx 0;
+}
+.container .header form input{
+  width:500rpx;
+  height: 75rpx; 
+  line-height: 75rpx;
+  font-size: 32rpx;
+  background: #fff;
+  margin:0 auto;
+  padding:0 10rpx;
+}
+
+.container .movie{
+  width:100%;
+  margin-top: 4rpx;
+}
+.container .movie .tab{
+  width: 100%;
+  display: flex;
+  color: #fff;
+  font-weight: 0;
+  font-size: 32rpx;
+}
+.container .movie .tab text{
+  flex: 1;
+  line-height: 120rpx;
+  text-align: center;
+  background: #1AAD16;
+  border-top: #1AAD16 solid 2rpx;
+  border-left: #fff solid 2rpx;
+}
+.container .movie .tab text:first-child{
+   border-left:0;
+}
+.container .movie .tab text.active{
+  background: #fff;
+  color: #1AAD16;
+}
+.container .movie .content{
+  width: 100%;
+}
