@@ -4,8 +4,18 @@ const app = getApp()
 
 Page({
   data: {
-    status: false,
-    animate: null
+    
   },
-  //事件处理函数
+  onLoad: function(){
+    let _self = this;
+    wx.request({
+      url: 'http://localhost/api/douban/movie.php',
+      data:{
+        act:'in_theaters'
+      },
+      success:function(res){
+        console.log(res);
+      }
+    })
+  }
 })

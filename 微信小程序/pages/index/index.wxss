@@ -39,6 +39,29 @@
   background: #fff;
   color: #1AAD16;
 }
+
 .container .movie .content{
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.movie .content .item{
+  width:33.3333%;
+  margin-top:20rpx;
+  overflow: hidden;
+}
+ .movie .content .item image{
+  width:240rpx;
+  display: block;
+  margin:0 auto;
+} 
+.movie .content .item .text-info{
+  font-size:24rpx;
+}
+.movie .content .item .text-info .title{
+  display: block;
+  width:100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
