@@ -3,22 +3,22 @@
   <view class="input-area">
     <view class="input">
       <image src="../../assets/images/search.png"></image>
-      <input 
-      placeholder='请输入你要查询的关键词'
-      bindinput="goSearch"
-      >
+      <input placeholder='请输入你要查询的关键词'>
       </input>
     </view>
-    <text bindtap="close">取消</text>
+    <text>取消</text>
   </view>
 
 
   <view class="result">
-    <scroll-view scroll-y="true" bindscrolltolower="loadMore">
+    <scroll-view 
+    scroll-y="true"
+    bindscrolltolower="loadMore"
+    >
       <view class="container">
         <view class="list">
-          <view class="item">
-            <text></text>
+          <view class="item" wx:for="{{movies.subjects}}" wx:key="index">
+            <text>{{item.title}}</text>
           </view>
         </view>
       </view>

@@ -21,7 +21,7 @@
 
       <view class="content">
         <view class='item' wx:for="{{movies}}" wx:key="{{index}}">
-          <image src='../../assets/images/p2517753454.jpg' mode='widthFix'></image>
+          <image src='../../assets/images/p2494950714.jpg' mode='widthFix'></image>
           <view class='text-info'>
             <text class='title'>{{item.title}}</text>
           </view>

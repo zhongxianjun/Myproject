@@ -14,6 +14,7 @@ Page({
     //正在热映电影总条数
     total:0
   },
+  
   onLoad: function(){
     let _self = this;
     wx.request({
@@ -26,6 +27,11 @@ Page({
         _self.setData({movies:res.data.subjects,start: 21,total:parseInt(res.data.total)});
       }
     })
+  },
+
+  onReady: function () {
+    //获取搜索组件实例对象
+    this.$searchCom = this.selectComponent("#searchCom");
   },
   
   //加载更多
@@ -55,11 +61,6 @@ Page({
         }
       });
     }
-  },
-
-  onReady:function(){
-    //获取搜索组件实例对象
-    this.$searchCom = this.selectComponent("#searchCom");
   },
 
   //进入搜索页面
