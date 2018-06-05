@@ -1,31 +1,39 @@
 <!--index.wxml-->
 <view class="container">
-  <!-- S 头部 -->
-  <view class="header">
-    <view class="search">
-      <form>
-        <input placeholder='请输入您要查询的电影'></input>
-      </form>
-    </view>
-  </view>
-  <!-- E 头部 -->
-
-  <!-- S  电影分类 -->
-  <view class="movie">
-    <view class="tab">
-      <text class='active'>正在热映</text>
-      <text>即将上映</text>
-      <text>热播Top250</text>
-    </view>
-
-    <view class="content">
-      <view class='item' wx:for="{{20}}" wx:key="{{}}">
-        <image src='../../assets/images/p2517753454.jpg' mode='widthFix'></image>
-        <view class='text-info'>
-          <text class='title'>复联3</text>
-        </view>
+  <scroll-view class="scroll-view" scroll-y="true" bindscrolltolower="loadMore">
+    <!-- S 头部 -->
+    <view class="header">
+      <view class="search">
+        <form>
+          <input placeholder='请输入您要查询的电影' bindfocus='search'></input>
+        </form>
       </view>
     </view>
-  </view>
-  <!-- E  电影分类 -->
+    <!-- E 头部 -->
+
+    <!-- S  电影分类 -->
+    <view class="movie">
+      <view class="tab">
+        <text class='active'>正在热映</text>
+        <text>即将上映</text>
+        <text>热播Top250</text>
+      </view>
+
+      <view class="content">
+        <view class='item' wx:for="{{movies}}" wx:key="{{index}}">
+          <image src='../../assets/images/p2517753454.jpg' mode='widthFix'></image>
+          <view class='text-info'>
+            <text class='title'>{{item.title}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="loading-state" wx:if="{{loadingState}}">
+        加载中...
+      </view>
+      <view class="more-state" wx:if="{{moreState}}">
+        已无更多数据
+      </view>
+    </view>
+    <!-- E  电影分类 -->
+  </scroll-view>
 </view>

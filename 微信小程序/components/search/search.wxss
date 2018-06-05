@@ -1,0 +1,43 @@
+/* components/search.wxss */
+.search{
+  width:100vw;
+  height:100vh;
+  background:#fff;
+  position: fixed;
+  left: 0;
+  top:0;
+  z-index:2000;
+}
+.input-area{
+  padding:40rpx;
+  display: flex;
+  align-items: center;
+  background:#eee;
+  justify-content: space-between;
+}
+.input-area .input{
+  position: relative;
+}
+.input-area input{
+  line-height:80rpx;
+  padding:10rpx 20rpx;
+  text-align:center;
+  width:500rpx;
+  background:#fff;
+  padding-left:60rpx;
+
+}
+.input-area image{
+  width:40rpx;
+  height:40rpx;
+  position:absolute;
+  left:10rpx;
+  top:16rpx;
+}
+
+.result scroll-view{
+  height: calc(100vh - 80rpx);
+}
+.result .item{
+  padding:10rpx;
+}

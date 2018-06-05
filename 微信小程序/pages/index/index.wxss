@@ -1,4 +1,7 @@
 /**index.wxss**/
+.scroll-view{
+  height:100vh;
+}
 .container .header{
   background: #1AAD16;
   padding: 50rpx 0;
@@ -11,6 +14,7 @@
   background: #fff;
   margin:0 auto;
   padding:0 10rpx;
+  text-align: center;
 }
 
 .container .movie{
@@ -64,4 +68,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
+}
+.movie .loading-state,.movie .more-state{
+  text-align: center;
+  padding:20rpx 0;
+  font-size:24rpx;
 }
